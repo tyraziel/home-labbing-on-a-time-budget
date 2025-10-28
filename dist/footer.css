@@ -1,0 +1,35 @@
+.reveal-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: left;
+  font-size: 1.0em;
+  color: #c9c9c9;
+  padding: 10px 10px 0.5em 10px;
+  background-color: rgba(0, 0, 0, 0.2); /* Optional: Add a subtle background */
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+/* img must be inline?  .reveal-footer-badge{
+  max-width: 90px;
+  margin:0.0em;
+  border:0px solid red;
+} */
+
+.reveal-footer-title{
+  font-size:0.75em;
+}
+
+.reveal-footer-binary{
+  margin-top:0.50em;
+  color: rgb(86, 30, 164);
+  font-size: 0.35em;
+  font-weight: bolder;
+}
+
+.reveal-footer-email{
+  color: rgb(86, 30, 164);
+  font-size: 0.55em;
+  font-weight: bolder;
+}

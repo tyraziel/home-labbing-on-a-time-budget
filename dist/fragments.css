@@ -1,0 +1,22 @@
+/* .reveal .fragment.highlight-blue,
+.reveal .fragment.highlight-current-blue,
+.reveal .fragment.highlight-current-green,
+.reveal .fragment.highlight-current-red,
+.reveal .fragment.highlight-green,
+.reveal .fragment.highlight-red, */
+.reveal .fragment.highlight-purple,
+.reveal .fragment.highlight-current-purple,
+.reveal .fragment.highlight-orange,
+.reveal .fragment.highlight-current-orange{
+  opacity:1;visibility:inherit
+}
+/* .reveal .fragment.highlight-red.visible{color:#ff2c2d}
+.reveal .fragment.highlight-green.visible{color:#17ff2e}
+.reveal .fragment.highlight-blue.visible{color:#1b91ff}
+.reveal .fragment.highlight-current-red.current-fragment{color:#ff2c2d}
+.reveal .fragment.highlight-current-green.current-fragment{color:#17ff2e}
+.reveal .fragment.highlight-current-blue.current-fragment{color:#1b91ff} */
+.reveal .fragment.highlight-purple.visible,
+.reveal .fragment.highlight-current-purple.current-fragment{color:#6b2cff}
+.reveal .fragment.highlight-orange.visible,
+.reveal .fragment.highlight-current-orange.current-fragment{color:#a84803}
