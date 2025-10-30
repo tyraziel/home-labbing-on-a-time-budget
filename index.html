@@ -47,35 +47,30 @@
                     </section>
                 </section>
 
-				<section style="padding-bottom:10em">
-					<h4>Home Labbing on a <span class="fragment highlight-purple">Time</span> Budget</h4>
-					<p class="fragment fade-in">Andrew Potozniak</p>
-				</section>
-
 				<section>
 					<section style="padding-bottom:10em">
 						<h3 style="color:darkred">DISCLAIMER - PART 1</h3>
-						<p>All views, opinions and stances, expressed or implied, are mine and mine alone and do not represent the views, opinions or stances of any employer or company, past, present or future.</p>
+						<p style="font-size:0.75em;">All views, opinions and stances, expressed or implied, are mine and mine alone and do not represent the views, opinions or stances of any employer or company, past, present or future.</p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3 style="color:darkred">DISCLAIMER - PART 2</h3>
-						<p>This presentation is for educational and homelab use only</p>  
-						<p>This session focuses on time-saving homelab strategies, not necessarily production grade security</p>
-						<p>It does not constitute professional security advice</p>
-    					<p>Implementations and examples are <strong>lab-only</strong></p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">This presentation is for <strong style="text-transform: uppercase;">educational and home lab use only</strong></p>  
+						<p style="font-size:0.75em; margin-bottom:2.0em;">This session focuses on time-saving home labbing strategies, not necessarily production grade security</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">It <strong style="text-transform: uppercase;">does not</strong> constitute professional security advice</p>
+    					<p style="font-size:0.75em; margin-bottom:2.0em;">Implementations and examples are <strong style="text-transform: uppercase;">lab only</strong></p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3 style="color:darkred">CODE NOTICE</h3>
-						<p>Sample code and configuration snippets in this session are provided under the <strong>MIT License</strong>, <em>as-is</em>, without warranty or guarantee of fitness for any purpose</p>
-						<p>Use responsibly and review before applying and/or executing</p>
-						<p>You assume all risk associated with their use</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">Sample code and configuration snippets in this session are provided under the <strong>MIT License</strong>, <em style="text-transform: uppercase;">as-is</em>, without warranty or guarantee of fitness for any purpose</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">Use responsibly and review before applying and/or executing</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em; text-transform: uppercase;"><strong>You assume all risk associated with their use</strong></p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3 style="color:darkolivegreen">DISCLAIMER - PART 3</h3>
-						<p class="fragment fade-in">No AI Assistants, users or homelabs were harmed in the making of this presentation</p>
-						<p class="fragment fade-in">All activities were performed by "trained professionals" on closed networks</p>
-						<p class="fragment fade-in">Results may vary; your uptime and harmony at home are not guaranteed</p>
-						<p class="fragment fade-in"><strong>Proceed at your own risk, you have been warned</strong></p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">No AI Assistants, users or homelabs were harmed in the making of this presentation</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">All activities were performed by "trained professionals" on closed networks</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">Results may vary; your <strong style="text-transform: uppercase">uptime and harmony at home</strong> are not guaranteed</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;"><strong class="fragment highlight-red" style="text-transform: uppercase">Proceed at your own risk, you have been warned</strong></p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3 style="color:gray">AI Attribution</h3>
@@ -163,6 +158,11 @@
 						<p style="font-size:0.5em; text-align:justify">This work was primarily human-created. AI was used to make stylistic edits, such as changes to structure, wording, and clarity. AI was used to make content edits, such as changes to scope, information, and ideas. AI was used to make new content, such as text, images, analysis, and ideas. AI was prompted for its contributions, or AI assistance was enabled. AI-generated content was reviewed and approved. The following model(s) or application(s) were used: OpenAI's GPT-5 (ChatGPT), Claude Code [Sonnet 4].</p>
 						<p style="font-size:0.25em; text-align:justify">https://aiattribution.github.io/statements/AIA-Ph-SeCeNc-Hin-R-?model=OpenAI%27s%20GPT%252D5%20(ChatGPT)%2C%20Claude%20Code%20%5BSonnet%204%5D-v1.0</p>
 					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Home Labbing on a <span class="fragment highlight-purple">Time</span> Budget</h4>
+						<p class="fragment fade-in">Andrew Potozniak</p>
+					</section>
 				</section>
 
 				<section>
@@ -201,7 +201,7 @@
 							<li class="fragment" style="margin-bottom:0.5em;">
 								<strong class="fragment highlight-blue">Design Smart</strong><span class="fragment">: <span class="fragment highlight-green">Identify</span> which services matter most and <span class="fragment highlight-green">scope</span> your lab to match your <span class="fragment highlight-purple">time budget</span></span>
 								<ul class="fragment">
-									<li>DNS, certificates, IDAM vs Git Repository, Artifact Repository, etc</li>
+									<li>DNS, PKI, IDAM vs Git Repository, Artifact Repository, etc</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-bottom:0.5em;">
@@ -237,21 +237,22 @@
 						<p><span class="fragment highlight-purple">Home labbing</span> is the wonderfully <span class="fragment highlight-yellow">expensive hobby</span> where you turn your extra hardware into a small-scale <span class="fragment highlight-blue">"data center"</span></p>
 						<p class="fragment"><em>(and occasionally, a space heater)</em></p>
 						<p class="fragment">Usually built to <span class="fragment highlight-green">learn</span> and <span class="fragment highlight-orange">experiment</span> with <span class="fragment highlight-blue">technology</span></p>
-						<p class="fragment"><em>(also to justify that old server in the basement)</em></p>
+						<p class="fragment"><em>(also to justify that "old" server in the basement)</em></p>
 					</section>
 
 					<section>
-						<h3>Why do I homelab?</h3>
+						<h3>Why do I home lab?</h3>
 						<p>To Learn</p>
 						<p>To be able to Experiment in a Zero Risk environment</p>
 						<p>To impress my friends</p>
+						<p>To talk about it at a conference</p>
 						<p>To complain about my power bill</p>
 					</section>
 
 					<section style="padding-bottom:10em">
 						<h3 style="margin-bottom:0em">My Home Lab</h3>
 						<p style="margin-bottom:0em; margin-top:0em; padding-bottom:0em"><img src="./img/homelab.jpg" alt="ms-01s" style="width:450px; margin-bottom:0em"/></p>
-						<p style="margin-top:0em"><img src="./img/homelab-resources.png" alt="proxmox resources" style="width:400px; margin-top:0em"/></p>
+						<p style="margin-top:0em" class="fragment fade-in"><img src="./img/homelab-resources.png" alt="proxmox resources" style="width:400px; margin-top:0em"/></p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3 style="margin-bottom:0em">My Home Lab</h3>
@@ -283,7 +284,7 @@
 							<li>Testing</li>
 							<li>Backup and Recovery</li>
 							<li>Simple is better</li>
-							<li>"Control" Node in the Homelab</li>
+							<li>"Control" Node in the Home Lab</li>
 						</ul>
 					</section>
 				</section>
@@ -291,6 +292,7 @@
 				<section>
 					<section>Why I didn't want to rely on "cloud based solutions" (like let's encrypt)?</section>
 					<section>Cloud "never goes down" joke</section>
+					<section>Ok, I do use GitHub, but I think that's a bit different, and at the end of the day Git is distributed so I have a copy of my source code locally even <i style="text-decoration:line-through;color:gray" class="fragment">if</i>when GitHub goes down.</section>
 				</section>
 
 				<section>
@@ -300,13 +302,19 @@
 				</section>
 
 				<section>
-					<section>Quick Pointers &amp; Tips</section>
-					<section>Naming Convention</section>
-					<section>
-						<blockquote>There are only <span class="fragment highlight-red">two</span> hard things in Computer Science: <span class="fragment highlight-orange">cache invalidation</span> and <span class="fragment highlight-purple">naming things</span> <span class="fragment fade-in">, and <span class="fragment highlight-red">off-by-one</span> errors.</span></span></blockquote>
-						<ul class="fragment">
+					<section style="padding-bottom:10em">
+						<h2>Quick Tips</h2>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Naming Convention</h3>
+						<blockquote class="fragment fade-in" style="font-size:0.85em">There are only <span class="fragment highlight-red">two</span> hard things in Computer Science: <span class="fragment highlight-orange">cache invalidation</span> and <span class="fragment highlight-purple">naming things</span> <span class="fragment fade-in">, and <span class="fragment highlight-red">off-by-one</span> errors.</span></span></blockquote>
+						<ul class="fragment" style="font-size:0.85em">
 							<li>Phil Karlton</li>
 							<li>Jeff Atwood / Leon Bambrick</li>
+						</ul>
+						<blockquote class="fragment fade-in" style="font-size:0.85em;margin-top:2.0em">You're exactly right, and AI Hallucinations.</blockquote>
+						<ul class="fragment" style="font-size:0.85em">
+							<li>Andrew Potozniak</li>
 						</ul>
 					</section>
 					<section>
@@ -314,14 +322,24 @@
 						<p>proxmox vmid</p>
 					</section>
 					<section>Passwords Common Convention - DISCLAIMER around only for non-production homelab, this is not security advice, seriously, it's not</section>
+					<section>Directory Structure</section>
 				</section>
 
 
 
 				<section>
-					<section>The approach to Automation</section>
-					<section>The three D's of Automation - Document, Document and Document! -- WRITE IT DOWN!  If you have limited time, and you'll come back to soemthing later, having really good detailed notes will help you immensily - how many times have you gotten back to something and there's a link and that link doesn't work anymore or whatever was on that page was changed, don't rely on links, rely on your notes!</section>
-					<section>What can't be automated document it like a walkthru - proxmox install - re-networking with SFPs</section>
+					<section>Automation</section>
+					<section>
+						<h3>The three D's of Automation</h3>
+						<p><span class="fragment fade-in">Document,</span> <span class="fragment fade-in">Document</span> <span class="fragment fade-in">and Document!</span></p>
+						WRITE IT DOWN!!!
+						If you have limited time, and you'll come back to something later, having really good and detailed notes will help you immensily.
+						Don't rely on links!  How many times have you gotten back to something and there's a link and that link doesn't work anymore or whatever was on that page was changed, rely on your notes!
+					</section>
+					<section>
+						What can't be automated document it like a walkthru, or at least enough to pass the 2am test. - proxmox install - re-networking with SFPs
+						I even have notes on how to work with my router.
+					</section>
 				</section>
 <section>
 $ ansible-playbook -i pdc-pdcdns-001,pdc-openldap-001,pdc-keycloak-001, -u user-one -K -k --ssh-common-args '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
@@ -410,6 +428,13 @@ $ cat ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
 					<section>packer (TBD?)</section>
 				</section>
 
+
+				<section>
+					<section>Core Services</section>
+					<section>VMs</section>
+					<section>DNS</section>
+					<section>IDAM</section>
+					<section>PKI (Public Key Infrastructure)</section>
 				<section><p>Planning your VMs - ssh keys for easy access, sudoers, motd</p></section>
 				<section>Manually updating templates vs packer</section>
 				<section>
@@ -422,19 +447,7 @@ $ cat ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
 					<section><ul>
 						<li>The CA Root</li>
 					</ul></section>
-					<section>Core Services</section>
-					<section>VMs</section>
-					<section>DNS</section>
-					<section>IDAM</section>
-					<section>PKI (Public Key Infrastructure)</section>
-					<section>
-						<ul>
-							<li>mkcert</li>
-							<li>openssl</li>
-							<li>kemo's PKI the hard way</li>
-							</li>
-						</ul>
-					</section>
+				</section>
 				</section>
 				<section>
 					<section>DNS</section>
@@ -446,7 +459,18 @@ $ cat ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
 					<section>LDAP via OpenLDAP and LDAP Access Manager</section>
 					<section>Others (SAML, OIDC) via Keycloak</section>
 				</section>
-				<section>PKI - Public Key Infrastructure</section>
+				<section>
+					<section>
+						<h3>PKI - Public Key Infrastructure</h3>
+						<ul>
+							<li>mkcert</li>
+							<li>openssl</li>
+							<li>kemo's PKI the hard way</li>
+							</li>
+						</ul>
+					</section>
+
+				</section>
 
 				<section>
 					<section>Recap</section>
