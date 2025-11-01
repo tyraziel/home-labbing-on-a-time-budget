@@ -328,11 +328,21 @@
 						</ul>
 					</section>
 					<section style="padding-bottom:10em">
-						<h3>Quick Tips - Naming Convention - TODO FINISH ME</h3>
-						<p>You'll want to come up with a naming convention.</p>
-						<p>Something meaningful, concise that contains server numbering.</p>
-						<p>homelab-[vm purpose or system]-0000</p>
-						<p>homelab-[os]-[version]-base</p>
+						<h3>Quick Tips - Naming Convention</h3>
+						<p class="fragment fade-in" style="font-size:0.85em">Something <span class="fragment highlight-blue">meaningful</span>, <span class="fragment highlight-blue">concise</span> that contains server <span class="fragment highlight-blue">numbering</span>.</p>
+						<p class="fragment fade-in" style="padding-bottom:0.0em;margin-bottom:0.0em">homelab<span class="fragment fade-in">-<span class="fragment highlight-yellow">[vm purpose or system]</span></span><span class="fragment fade-in">-<span class="fragment highlight-yellow">[0000]</span></span></p>
+						<ul style="font-size:0.75em;padding-top:0.0em;margin-top:0.0em;">
+							<li class="fragment fade-in">homelab-dns-0001</li>
+							<li class="fragment fade-in">homelab-ldap-0001</li>
+							<li class="fragment fade-in">homelab-testldap-0001</li>
+						</ul>
+						
+						<p class="fragment fade-in" style="padding-bottom:0.0em;margin-bottom:0.0em">homelab<span class="fragment fade-in">-<span class="fragment highlight-yellow">[os]-[version]</span></span><span class="fragment fade-in">-base</span></p>
+						<ul style="font-size:0.75em;padding-top:0.0em;margin-top:0.0em;">
+							<li class="fragment fade-in">homelab-ubuntu-24-base</li>
+							<li class="fragment fade-in">homelab-ubuntu-22-base</li>
+							<li class="fragment fade-in">homelab-slackware-15-base</li>
+						</ul>
 					</section>
 					<section>
 						<h3>Quick Tips - Numbering Convention - TODO FINISH ME</h3>
@@ -351,57 +361,57 @@
 						<h3>Quick Tips - Directory Structure</h3>
 						<p>Have a <span class="fragment highlight-green">good memorable structure</span> so you're not <span class="fragment highlight-red">chasing down</span> documents, playbooks or scripts.</p>
 						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
- home-lab-management/                                                               
- ├── ansible/
- │   ├── guest-vm/
- │   │   ├── gvm_generate_ssh_keys.yml
- │   │   ├── gvm_patching_apt.yml
- │   │   ├── gvm_patching_dnf.yml
- │   │   ├── gvm_simple_ping.yml
- │   │   ├── gvm_update_etc_hosts.yml
- │   │   ├── gvm_update_network_netplan.yml
- │   │   └── gvm_update_network_nmcli.yml
- │   ├── host/
- │   │   └── host_patching_apt.yml
- │   ├── proxmox/
- │   │   ├── pxmx_create_vms_from_template.yml
- │   │   ├── pxmx_get_vms_state.yml
- │   │   ├── pxmx_migrate_vms.yml
- │   │   ├── pxmx_remove_vms.yml
- │   │   ├── pxmx_restart_vms.yml
- │   │   ├── pxmx_snapshot_vms.yml
- │   │   ├── pxmx_start_vms.yml
- │   │   ├── pxmx_stop_nodes.yml
- │   │   ├── pxmx_stop_vms.yml
- │   │   ├── pxmx_update_cpu_vms.yml
- │   │   └── pxmx_update_memory_vms.yml
- │   └── systems/
- │       ├── control/
- │       │   └── bootstrap_control_ubuntu.yml
- │       ├── dns/
- │       │   ├── assign_next_available_ip_technitium.yml
- │       │   ├── bootstrap_technitium.yml
- │       │   ├── create_a_record_technitium.yml
- │       │   └── install_technitium_ubuntu.yml
- │       ├── keycloak/
- │       │   └── install_keycloak.yml
- │       └── ldap/
- │           ├── install_ldap_account_manager_ubuntu.yml
- │           ├── install_openldap_ubuntu.yml
- │           └── setup_ldap_directory.yml
- └── terraform/
-     └── proxmox/
-         └── ubuntu/
-             ├── mutli-vm/
-             │   ├── 000_variables.tf
-             │   ├── 001_provider.tf
-             │   ├── 002_vm_build.tf
-             │   └── 003_output.tf
-             └── single-vm/
-                 ├── 000_variables.tf
-                 ├── 001_provider.tf
-                 ├── 002_vm_build.tf
-                 └── 003_output.tf
+							home-lab-management/                                                               
+							├── ansible/
+							│   ├── guest-vm/
+							│   │   ├── gvm_generate_ssh_keys.yml
+							│   │   ├── gvm_patching_apt.yml
+							│   │   ├── gvm_patching_dnf.yml
+							│   │   ├── gvm_simple_ping.yml
+							│   │   ├── gvm_update_etc_hosts.yml
+							│   │   ├── gvm_update_network_netplan.yml
+							│   │   └── gvm_update_network_nmcli.yml
+							│   ├── host/
+							│   │   └── host_patching_apt.yml
+							│   ├── proxmox/
+							│   │   ├── pxmx_create_vms_from_template.yml
+							│   │   ├── pxmx_get_vms_state.yml
+							│   │   ├── pxmx_migrate_vms.yml
+							│   │   ├── pxmx_remove_vms.yml
+							│   │   ├── pxmx_restart_vms.yml
+							│   │   ├── pxmx_snapshot_vms.yml
+							│   │   ├── pxmx_start_vms.yml
+							│   │   ├── pxmx_stop_nodes.yml
+							│   │   ├── pxmx_stop_vms.yml
+							│   │   ├── pxmx_update_cpu_vms.yml
+							│   │   └── pxmx_update_memory_vms.yml
+							│   └── systems/
+							│       ├── control/
+							│       │   └── bootstrap_control_ubuntu.yml
+							│       ├── dns/
+							│       │   ├── assign_next_available_ip_technitium.yml
+							│       │   ├── bootstrap_technitium.yml
+							│       │   ├── create_a_record_technitium.yml
+							│       │   └── install_technitium_ubuntu.yml
+							│       ├── keycloak/
+							│       │   └── install_keycloak.yml
+							│       └── ldap/
+							│           ├── install_ldap_account_manager_ubuntu.yml
+							│           ├── install_openldap_ubuntu.yml
+							│           └── setup_ldap_directory.yml
+							└── terraform/
+								└── proxmox/
+									└── ubuntu/
+										├── mutli-vm/
+										│   ├── 000_variables.tf
+										│   ├── 001_provider.tf
+										│   ├── 002_vm_build.tf
+										│   └── 003_output.tf
+										└── single-vm/
+											├── 000_variables.tf
+											├── 001_provider.tf
+											├── 002_vm_build.tf
+											└── 003_output.tf
 						</code></pre>
 					</section>
 					<section>
@@ -431,29 +441,32 @@
 					</section>
 					<section>
 						<h3>My Flow - TODO FINISH ME</h3>
-						ansible/proxmox/pxmx_create_vms_from_template.yml
-						ansible/proxmox/pxmx_start_vms.yml
-						ansible/systems/dns/assign_next_available_ip_technitium.yml
-						ansible/guest-vm/gvm_update_network_netplan.yml
-						ansible/guest-vm/gvm_patching_apt.yml
-						ansible/proxmox/pxmx_snapshot_vms.yml
+						./ansible/proxmox/pxmx_create_vms_from_template.yml
+						./ansible/proxmox/pxmx_start_vms.yml
+						./ansible/systems/dns/assign_next_available_ip_technitium.yml
+						./ansible/guest-vm/gvm_update_network_netplan.yml
+						./ansible/guest-vm/gvm_patching_apt.yml
+						./ansible/proxmox/pxmx_snapshot_vms.yml
 
 						New Server Ready to go in about 5:30 (2:30 spent on patching)
 
 						Pre-work (which we will see later) was performed to create the template.
 					</section>
 
-					<section> TODO FINISH ME
-						ansible-core
-						Sometimes there are modules, and sometimes you'll fall back to things like uri or command as a last resort.
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core</h3>
+						<ul>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-red">Agentless</span> <span class="fragment fade-in highlight-red">Automation</span></li>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-blue">Playbooks</span> written in <span class="fragment fade-in highlight-green">YAML</span></li>
+							<li class="fragment fade-in">$<span class="fragment fade-in highlight-yellow"> ansible-playbook</span></li>
+						</ul>
 					</section>
-<section>
-	<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
-$ ansible-playbook -i homelab-server-0001,homelab-server-0002, \ 
-  -u user-one -K -k \
-  ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
-</code></pre>
-<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core - os patching</h3>
+						<pre class="fragment fade-in" style="margin-bottom:2.0em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook gvm_patching_apt.yml
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
 ---
 - name: Patch Guest VM (apt)
   hosts: all
@@ -467,35 +480,30 @@ $ ansible-playbook -i homelab-server-0001,homelab-server-0002, \
         update_cache: true
         state: "latest"
       notify:
-       - Reboot Host
+      - Reboot Host
 
   handlers:
     - name: Reboot Host
       ansible.builtin.reboot:
         msg: "OS Patching completed, rebooting"
         reboot_timeout: 1800
-</code></pre>
-</section>
+						</code></pre>
+					</section>
 
-<section> TODO FINISHE ME
-Let's look at another example...
-
-<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core - install openldap</h3>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook install_openldap_ubuntu.yml
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
 ---
 - name: Install OpenLDAP Server
   hosts: all
   gather_facts: false
   become: true
-
-  vars:
-    ldap_domain: homelab.local
-
-  vars_prompt:
-    - name: slapd_admin_password
-      prompt: "slapd Admin Password"
-      unsafe: true
-      private: true
-      confirm: true
+  
+  #Removed vars section for presentation
 
   tasks:
     - name: Install packages
@@ -520,14 +528,14 @@ Let's look at another example...
           - slapcat_output.stdout is search(ldap_domain.split('.')[1])
         fail_msg: "LDAP was not configured correctly:  {{ slapcat_output.stdout | default ('NO_STDOUT_AVAILABLE') }}"
         success_msg: "LDAP Configured Correctly!"
-</code></pre>
+						</code></pre>
+						<pre class="fragment fade-in" style="margin-bottom:2.0em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook setup_ldap_directory.yml
+						</code></pre>
+					</section>
 
-ansible-playbook -i homelab-ldap-0001, -u [automation_user] -K -k ./home-lab-management/ansible/systems/install_openldap_ubuntu.yml
-ansible-playbook ./home-lab-management/ansible/systems/ldap/setup_ldap_directory.yml --extra-vars='{"ldap_url":"ldap://homelab-ldap-0001:389"}'
-</code></pre>
-</section>
 					<section> TODO FINISH ME
-						terraform-cli
+						<h3 style="text-transform: lowercase;">terraform-cli</h3>
 					</section>
 <section> TODO FINISH ME
 	<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
@@ -591,7 +599,7 @@ $ terraform destroy
 					<section><h3>Core Services</h3></section>
 
 					<section>
-						<p>Planning your VM Templates - ssh keys for easy access, sudoers, motd</p>
+						<p>Planning your VM Templates - ssh keys for easy access, sudoers, motd, rootCA</p>
 						<p>You might spend a lot of time here getting things set up for the first time, but it will be worth it, and it will be consistent!</p>
 						<p>Can "re-template" rather quickly, albeit manually (packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</p>
 					</section>
