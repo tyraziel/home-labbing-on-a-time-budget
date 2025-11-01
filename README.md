@@ -10,12 +10,14 @@ Whether you're an IT professional, a student, or a hobbyist, this session will p
 
 ## Attendee Takeaways
 
-* **Design Smart**: Identify which services matter most (DNS, certificates, IDAM, automation) and scope your lab to match your time budget.
-* **Automate Early**: Use lightweight automation to simplify setup, maintenance, and patching so your lab doesn’t eat into family or free time.
-* **Stay Independent**: Build your lab on self-hosted tools instead of relying on cloud-only solutions.
 * **Optimize Time**: Apply practical shortcuts and workflows that keep your lab useful without turning it into a second job.
-* **Be Flexible**: You can always pivot and iterate as you learn more.
-* **Take Notes**: Trust me, you'll rely on these more than you'll know.
+* **Design Smart**: Identify which services matter most and scope your lab to match your time budget.
+* **Evaluate Goals**: Is it a nice to have, or am I doing this to learn or to achieve a concrete goal?
+* **Automate Early**: Use automation to simplify setup, maintenance, and patching, so your lab doesn't eat into family or other free time.
+* **Stay Independent**: Build your lab on self-hosted tools instead of relying on cloud/external solutions (as best as you can).
+* **Be Flexible**: You can always pivot and iterate as you learn.
+* **Document Everything**: You figured it all out at least once, so why waste time figuring it out again?
+* **Take Notes**: Trust me, you'll rely on your notes more than you'll know.
 
 ### Tyraziel's Home Lab Management GitHub
 
