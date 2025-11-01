@@ -439,18 +439,18 @@
 						 re-networking with SFPs
 						I even have notes on how to work with my router.
 					</section>
-					<section>
-						<h3>My Flow - TODO FINISH ME</h3>
-						./ansible/proxmox/pxmx_create_vms_from_template.yml
-						./ansible/proxmox/pxmx_start_vms.yml
-						./ansible/systems/dns/assign_next_available_ip_technitium.yml
-						./ansible/guest-vm/gvm_update_network_netplan.yml
-						./ansible/guest-vm/gvm_patching_apt.yml
-						./ansible/proxmox/pxmx_snapshot_vms.yml
-
-						New Server Ready to go in about 5:30 (2:30 spent on patching)
-
-						Pre-work (which we will see later) was performed to create the template.
+					<section style="padding-bottom:10em">
+						<h3>My Flow for a New VM</h3>
+						<ul style="list-style: none; font-size:0.75em">
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_create_vms_from_template.yml</li>
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_start_vms.yml</li>
+							<li class="fragment fade-in">./ansible/systems/dns/assign_next_available_ip_technitium.yml</li>
+							<li class="fragment fade-in">./ansible/guest-vm/gvm_update_network_netplan.yml</li>
+							<li class="fragment fade-in">./ansible/guest-vm/gvm_patching_apt.yml</li>
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_snapshot_vms.yml</li>
+						</ul>
+						<p class="fragment fade-in" style="font-size:0.80em"><span class="fragment highlight-yellow">New server</span> <span class="fragment highlight-green">ready</span> to go in about <span class="fragment highlight-green">5:30</span> <span class="fragment fade-in"><em>(with <span class="fragment highlight-red">2:30</span> spent on <span class="fragment highlight-blue">patching</span>)</em></span></p>
+						<p class="fragment fade-in" style="font-size:0.80em"><em>(Pre-work was performed to create the template)</em></p>
 					</section>
 
 					<section style="padding-bottom:10em">
@@ -534,15 +534,22 @@
 						</code></pre>
 					</section>
 
-					<section> TODO FINISH ME
+					<section style="padding-bottom:10em">
 						<h3 style="text-transform: lowercase;">terraform-cli</h3>
+						<ul>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-purple">Infrastructure</span> <span class="fragment fade-in highlight-purple">as</span> <span class="fragment fade-in highlight-purple">Code</span></li>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-blue">Configuration</span> written in <span class="fragment fade-in highlight-purple">HCL</span></li>
+							<li class="fragment fade-in">$<span class="fragment fade-in highlight-yellow"> terraform</span></li>
+						</ul>
 					</section>
-<section> TODO FINISH ME
-	<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
-$ terraform apply
-</code></pre>
 
-<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">terraform-cli - single vm</h3>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ terraform apply
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
 resource "proxmox_vm_qemu" "tf-ubuntu-test" {
   name        = "${var.vm_guest_name}"
   desc        = "A VM created for terraform testing."
@@ -586,14 +593,12 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
   skip_ipv6 = true
   
 }
-</code></pre>
-<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
-$ terraform destroy
-</code></pre>
-</section>
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ terraform destroy
+						</code></pre>
+					</section>
 				</section>
-
-
 
 				<section> TODO - FINISH ME
 					<section><h3>Core Services</h3></section>
