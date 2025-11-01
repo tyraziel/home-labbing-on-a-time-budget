@@ -328,27 +328,28 @@
 						</ul>
 					</section>
 					<section style="padding-bottom:10em">
-						<h3>Quick Tips - Naming Convention</h3>
+						<h3>Quick Tips - Naming Convention - TODO FINISH ME</h3>
 						<p>You'll want to come up with a naming convention.</p>
 						<p>Something meaningful, concise that contains server numbering.</p>
 						<p>homelab-[vm purpose or system]-0000</p>
 						<p>homelab-[os]-[version]-base</p>
 					</section>
 					<section>
-						<h3>Quick Tips - Numbering Convention</h3>
+						<h3>Quick Tips - Numbering Convention - TODO FINISH ME</h3>
 						<p>vmids</p>
 						<p>900s for templates</p>
 						<p>000s for core services</p>
+						<p><em>404 for servers that have gone missing</em></p>
 					</section>
 					<section>
-						<h3>Quick Tips - Passwords</h3>
+						<h3>Quick Tips - Passwords - TODO FINISH ME</h3>
 						<p>Come up with some memorable clever scheme for the passwords for accounts within your home lab, but different from everything else you use, and not the defaults, or 'password'.</p>
 						<p class="fragment fade-in" style="margin-bottom:0.0em; padding-bottom:0.0em"><span class="fragment highlight-red">DISCLAIMER</span></p>
 						<p class="fragment fade-in" style="margin-top:0.0em; padding-top:0.0em">This is <span class="fragment highlight-red">NOT</span> <span class="fragment highlight-red">security advice</span><span class="fragment fade-in"> <em>(seriously, it's not)</em></span></p>
 					</section>
 					<section style="padding-bottom:10em">
 						<h3>Quick Tips - Directory Structure</h3>
-						<p>Have a good memorable structure so you're not chasing down documents, playbooks or scripts.</p>
+						<p>Have a <span class="fragment highlight-green">good memorable structure</span> so you're not <span class="fragment highlight-red">chasing down</span> documents, playbooks or scripts.</p>
 						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
  home-lab-management/                                                               
  ├── ansible/
@@ -404,18 +405,16 @@
 						</code></pre>
 					</section>
 					<section>
-						<h3>Quick Tips - Command History</h3>
+						<h3>Quick Tips - Command History - TODO FINISH ME</h3>
 						<p>When you've forgotten to write things down, the command history is your new friend.</p>
 						<p>If you take away anything from this presentation today, fzf is one of the best utilities that I use on a daily basis to save time.</p>
 						<p>fzf - command-line fuzzy finder - https://github.com/junegunn/fzf</p>
 					</section>
 				</section>
 
-
-
 				<section>
 					<section>
-						<h3>Automation</h3>
+						<h3>Automation - TODO FINISH ME</h3>
 						<h4>The three D's of Automation</h4>
 						<p><span class="fragment fade-in">Document,</span> <span class="fragment fade-in">Document</span> <span class="fragment fade-in">and Document!</span></p>
 						<p><span class="fragment fade-in">WRITE</span> <span class="fragment fade-in">IT</span> <span class="fragment fade-in">DOWN</span><span class="fragment fade-in">!!!</span>
@@ -430,8 +429,21 @@
 						 re-networking with SFPs
 						I even have notes on how to work with my router.
 					</section>
-
 					<section>
+						<h3>My Flow - TODO FINISH ME</h3>
+						ansible/proxmox/pxmx_create_vms_from_template.yml
+						ansible/proxmox/pxmx_start_vms.yml
+						ansible/systems/dns/assign_next_available_ip_technitium.yml
+						ansible/guest-vm/gvm_update_network_netplan.yml
+						ansible/guest-vm/gvm_patching_apt.yml
+						ansible/proxmox/pxmx_snapshot_vms.yml
+
+						New Server Ready to go in about 5:30 (2:30 spent on patching)
+
+						Pre-work (which we will see later) was performed to create the template.
+					</section>
+
+					<section> TODO FINISH ME
 						ansible-core
 						Sometimes there are modules, and sometimes you'll fall back to things like uri or command as a last resort.
 					</section>
@@ -439,7 +451,6 @@
 	<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
 $ ansible-playbook -i homelab-server-0001,homelab-server-0002, \ 
   -u user-one -K -k \
-  --ssh-common-args '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' \
   ./home-lab-management/ansible/guest-vm/gvm_patching_apt.yml
 </code></pre>
 <pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
@@ -465,10 +476,60 @@ $ ansible-playbook -i homelab-server-0001,homelab-server-0002, \
         reboot_timeout: 1800
 </code></pre>
 </section>
-					<section>
+
+<section> TODO FINISHE ME
+Let's look at another example...
+
+<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+---
+- name: Install OpenLDAP Server
+  hosts: all
+  gather_facts: false
+  become: true
+
+  vars:
+    ldap_domain: homelab.local
+
+  vars_prompt:
+    - name: slapd_admin_password
+      prompt: "slapd Admin Password"
+      unsafe: true
+      private: true
+      confirm: true
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        name: debconf-utils
+        state: present
+
+    - name: Install slapd and ldap-utils
+      ansible.builtin.shell: echo 'slapd/root_password password {{ slapd_admin_password }}' | debconf-set-selections && echo 'slapd/root_password_again password {{ slapd_admin_password }}' | debconf-set-selections && DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
+
+    - name: Reconfigure slapd
+      ansible.builtin.shell: echo "slapd slapd/no_configuration boolean false" | debconf-set-selections && echo "slapd slapd/domain string {{ ldap_domain }}" | debconf-set-selections && echo "slapd slapd/password1 password {{ slapd_admin_password }}" | debconf-set-selections && echo "slapd slapd/password2 password {{ slapd_admin_password }}" | debconf-set-selections && echo "slapd slapd/purge_database boolean false" | debconf-set-selections && echo "slapd slapd/allow_ldap_v2 boolean false" | debconf-set-selections && echo "slapd slapd/move_old_database boolean true" | debconf-set-selections && dpkg-reconfigure -f noninteractive slapd
+
+    - name: Run slapcat
+      ansible.builtin.shell: slapcat
+      register: slapcat_output
+
+    - name: Validate ldap config
+      ansible.builtin.assert:
+        that: 
+          - slapcat_output.stdout is search(ldap_domain.split('.')[0])
+          - slapcat_output.stdout is search(ldap_domain.split('.')[1])
+        fail_msg: "LDAP was not configured correctly:  {{ slapcat_output.stdout | default ('NO_STDOUT_AVAILABLE') }}"
+        success_msg: "LDAP Configured Correctly!"
+</code></pre>
+
+ansible-playbook -i homelab-ldap-0001, -u [automation_user] -K -k ./home-lab-management/ansible/systems/install_openldap_ubuntu.yml
+ansible-playbook ./home-lab-management/ansible/systems/ldap/setup_ldap_directory.yml --extra-vars='{"ldap_url":"ldap://homelab-ldap-0001:389"}'
+</code></pre>
+</section>
+					<section> TODO FINISH ME
 						terraform-cli
 					</section>
-<section>
+<section> TODO FINISH ME
 	<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
 $ terraform apply
 </code></pre>
@@ -526,43 +587,49 @@ $ terraform destroy
 
 
 
-				<section>
-					<section>Core Services</section>
-					<section>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</section>
-					<section>VMs</section>
-					<section>DNS</section>
-					<section>IDAM
-						OpenLDAP with Ldap A
-					</section>
-					<section>PKI (Public Key Infrastructure)</section>
-				<section><p>Planning your VMs - ssh keys for easy access, sudoers, motd</p></section>
-				<section>Manually updating templates vs packer</section>
-				<section>
-					<section>VMs vs Containers</section>
-					<section><p>Sure, containers can be quicker, everything is already baked in, but you'll still need a VM, you'll need to manage the container runtime, and if you forget to setup proper volume mounting, boom you could lose a bunch of data and configuration (unless you want to test other automation against something like this).  If you do use containers, make sure you trust the source you're pulling them from.</p></section>
-				</section>
-				<section>
-					<section>The Control Node</section>
-					<section>The Control Node's Purpose</section>
-					<section><ul>
-						<li>The CA Root</li>
-					</ul></section>
-				</section>
-				</section>
-				<section>
-					<section>DNS</section>
-					<section>Router + DHCP (and reservations)
-						Avoid IP collisions on older DHCP reservations and resetting the router.
+				<section> TODO - FINISH ME
+					<section><h3>Core Services</h3></section>
 
+					<section>
+						<p>Planning your VM Templates - ssh keys for easy access, sudoers, motd</p>
+						<p>You might spend a lot of time here getting things set up for the first time, but it will be worth it, and it will be consistent!</p>
+						<p>Can "re-template" rather quickly, albeit manually (packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</p>
 					</section>
-					<section>Technitium</section>
-				</section>
-				<section>
-					<section>Identity and Access Management</section>
-					<section>LDAP via OpenLDAP and LDAP Access Manager</section>
-					<section>Others (SAML, OIDC) via Keycloak</section>
-				</section>
-				<section>
+				
+					<section>
+						<h3>VMs vs Containers</h3>
+						<p>Sure, containers can be quicker, everything is already baked in, but you'll still need a VM, you'll need to manage the container runtime, and if you forget to setup proper volume mounting, boom you could lose a bunch of data and configuration (unless you want to test other automation against something like this).  If you do use containers, make sure you trust the source you're pulling them from.</p>
+					</section>
+
+					<section>
+						<section>The Control Node</section>
+						<section>The Control Node's Purpose</section>
+						<section><ul>
+							<li>The CA Root</li>
+						</ul></section>
+					</section>
+
+
+					<section>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</section>
+					
+					<section>
+						<h3>DNS</h3>
+						<p>Router + DHCP (and reservations)</p>
+						<p>Avoid IP collisions on older DHCP reservations and resetting the router.</p>
+
+
+						<p>Technitium</p>
+					</section>
+
+					<section>
+						<h3>IDAM</h3>
+						<section>Identity and Access Management</section>
+						<section>LDAP via OpenLDAP and LDAP Access Manager</section>
+						<section>Others (SAML, OIDC) via Keycloak</section>
+
+							OpenLDAP 
+								with optionally Ldap Account Manager
+					</section>
 					<section>
 						<h3>PKI - Public Key Infrastructure</h3>
 						<ul>
@@ -605,9 +672,18 @@ openssl x509 -in rootCA.pem -text -noout
 				</section>
 
 				<section>
-					<section>Recap</section>
-				</section>
-				<section>
+					<section style="padding-bottom:10em">
+						<h3>Recap &amp; Closing</h3>
+						<p>
+							<span class="fragment fade-in highlight-blue">Optimize Time</span><span class="fragment fade-in">, <span class="fragment highlight-blue">Design Smart</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Evaluate Goals</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Automate Early</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Stay Independent</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Be Flexible</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Document Everything</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Take Notes</span></span>
+						</p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Recap &amp; Closing</h3>
+						<p>Slides (Reveal.js): <span class="fragment fade-in">https://github.com/tyraziel/home-labbing-on-a-time-budget/</span></p>
+						<p>Home Lab Management: <span class="fragment fade-in">https://github.com/tyraziel/home-lab-management/</span></p>
+						<p>THOUGHTS.md <span class="fragment fade-in">https://tyraziel.substack.com/</span></p>
+					</section>
 					<section><h3>THANK YOU</h3></section>
 					<section><h3>Q&amp;A</h3></section>
 				</section>
