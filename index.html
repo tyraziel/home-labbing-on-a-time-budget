@@ -611,51 +611,53 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
 
 					<section style="padding-bottom:10em">
 						<h4>Core Services - Virtual Machine Templates</h4>
-						<p>You might spend a lot of time here creating templates, but it's worth it, your vms will be consistent, and you'll be able to spin up new servers in minutes!</p>
-						<ul>
-							<li>user account</li>
-							<li>ssh keys</li>
-							<li>sudoers</li>
-							<li>motd</li>
-							<li>rootCA trust</li>
-							<li>patching</li>
-							<li>sysprep/sealing</li>
+						<p class="fragment fade-in" style="font-size:0.70em">You might spend a <span class="fragment highlight-red">lot of time</span> creating templates<span class="fragment fade-in">, but it's <span class="fragment highlight-yellow">worth it</span></span><span class="fragment fade-in">, your vms will be <span class="fragment highlight-green">consistent</span></span><span class="fragment fade-in">, and you'll be able to spin up new servers <span class="fragment highlight-purple">in minutes</span>!</span></p>
+						<ul style="font-size:0.75em">
+							<li class="fragment fade-in">user account</li>
+							<li class="fragment fade-in">ssh keys</li>
+							<li class="fragment fade-in">sudoers</li>
+							<li class="fragment fade-in">motd</li>
+							<li class="fragment fade-in">rootCA trust</li>
+							<li class="fragment fade-in">patching</li>
+							<li class="fragment fade-in">sysprep/sealing</li>
 						</ul>
-						<p>"Re-templating" can be rather quick, albeit manually</p>
-						<p><em>(packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</em></p>
+						<p class="fragment fade-in" style="font-size:0.70em">"Re-templating" can be <span class="fragment highlight-purple">quick</span>, albeit <span class="fragment highlight-red">manual</span></p>
+						<p class="fragment fade-in" style="font-size:0.5em"><em>(packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</em></p>
 					</section>
 				
 					<section style="padding-bottom:10em">
 						<h4>Core Services - The Control Node</h4>
 						<ul>
-							<li>The Automator</li>
-							<li>The Certificate Authority</li>
-							<li>Testing</li>
+							<li class="fragment fade-in">The <span class="fragment highlight-red">Automator</span></li>
+							<li class="fragment fade-in">The Certificate <span class="fragment highlight-yellow">Authority</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Testing</span></li>
 						</ul>
 					</section>
 
-					<section>
-						<h4>Cores Services - Domain Name System</h4>
-						<p>Router + Dynamic Host Control Protocol (and reservations)</p>
+					<section style="padding-bottom:10em">
+						<h4>Cores Services - Domain Name System - TODO</h4>
+						<p>hosts files - simple, can get yucky, error prone, lack consistency</p>
+						<p>Router + Dynamic Host Control Protocol (and reservations) - manual intervention for every new server, IPs could collide (the roku takes a server's IP)</p>
 						<p>Avoid IP collisions on older DHCP reservations and resetting the router.</p>
+						<p>IP Blocks - DHCP claims a block and you claim a block for your homelab</p>
 
 
 						<p>Technitium</p>
 					</section>
 
-					<section>
-						<h4>Indentity and Access Management (IDAM) - TODO</h4>
+					<section style="padding-bottom:10em">
+						<h4>Identity and Access Management (IDAM) - TODO</h4>
 						<p>LDAP via OpenLDAP and LDAP Access Manager</p>
 						<p>Others (SAML, OIDC) via Keycloak</p>
 					</section>
 
 					<section style="padding-bottom:10em">
 						<h4>Core Services - Public Key Infrastructure</h4>
-						<p>mkcert</p>
-						<p>[RootCA] -> [Leaf]</p>
-						<ul>
-							<li>mkcert [hostname|fqdn|ip] [hostname|fqdn|ip] [hostname|fqdn|ip]</li>
-						</ul>
+						<p class="fragment fade-in">mkcert</p>
+						<p class="fragment fade-in">[<span class="fragment highlight-orange">RootCA</span>] -> [<span class="fragment highlight-green">Leaf</span>]</p>
+						<pre class="fragment fade-in" style="margin-top:4.5em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ mkcert [hostname|fqdn|ip] [hostname|fqdn|ip] ...
+						</code></pre>
 					</section>
 
 					<section style="padding-bottom:10em">
@@ -683,12 +685,6 @@ $ ls
 dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
 						</code></pre>
 					</section>
-					<section style="padding-bottom:10em">
-						<h4>Core Services - Public Key Infrastructure</h4>
-						<p>mkcert</p>
-						<p>want to start over - remove ~/.local/share/mkcert/*</p>
-						<p>***PRIVATE KEYS ARE NOT PASSWORD PROTECTED***</p>
-					</section>
 				</section>
 
 				<section>
@@ -705,6 +701,7 @@ dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
 					<section style="padding-bottom:10em">
 						<h3>Final Thoughts - TODO</h3>
 						<p>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</p>
+						<p>Diagram of gitea "3 tier" vs gitea with SQLite "All in One" (and was able to hook in LDAP)</p>
 					</section>
 				</section>
 
