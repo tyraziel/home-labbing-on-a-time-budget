@@ -604,34 +604,39 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
 					</section>
 				</section>
 
-				<section> TODO - FINISH ME
-					<section><h3>Core Services</h3></section>
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>Core Services</h3>
+					</section>
 
-					<section>
-						<p>Planning your VM Templates - ssh keys for easy access, sudoers, motd, rootCA</p>
-						<p>You might spend a lot of time here getting things set up for the first time, but it will be worth it, and it will be consistent!</p>
-						<p>Can "re-template" rather quickly, albeit manually (packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</p>
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Virtual Machine Templates</h4>
+						<p>You might spend a lot of time here creating templates, but it's worth it, your vms will be consistent, and you'll be able to spin up new servers in minutes!</p>
+						<ul>
+							<li>user account</li>
+							<li>ssh keys</li>
+							<li>sudoers</li>
+							<li>motd</li>
+							<li>rootCA trust</li>
+							<li>patching</li>
+							<li>sysprep/sealing</li>
+						</ul>
+						<p>"Re-templating" can be rather quick, albeit manually</p>
+						<p><em>(packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</em></p>
 					</section>
 				
-					<section>
-						<h3>VMs vs Containers</h3>
-						<p>Sure, containers can be quicker, everything is already baked in, but you'll still need a VM, you'll need to manage the container runtime, and if you forget to setup proper volume mounting, boom you could lose a bunch of data and configuration (unless you want to test other automation against something like this).  If you do use containers, make sure you trust the source you're pulling them from.</p>
+					<section style="padding-bottom:10em">
+						<h4>Core Services - The Control Node</h4>
+						<ul>
+							<li>The Automator</li>
+							<li>The Certificate Authority</li>
+							<li>Testing</li>
+						</ul>
 					</section>
 
 					<section>
-						<section>The Control Node</section>
-						<section>The Control Node's Purpose</section>
-						<section><ul>
-							<li>The CA Root</li>
-						</ul></section>
-					</section>
-
-
-					<section>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</section>
-					
-					<section>
-						<h3>DNS</h3>
-						<p>Router + DHCP (and reservations)</p>
+						<h4>Cores Services - Domain Name System</h4>
+						<p>Router + Dynamic Host Control Protocol (and reservations)</p>
 						<p>Avoid IP collisions on older DHCP reservations and resetting the router.</p>
 
 
@@ -639,21 +644,26 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
 					</section>
 
 					<section>
-						<h3>IDAM</h3>
-						<section>Identity and Access Management</section>
-						<section>LDAP via OpenLDAP and LDAP Access Manager</section>
-						<section>Others (SAML, OIDC) via Keycloak</section>
-
-							OpenLDAP 
-								with optionally Ldap Account Manager
+						<h4>Indentity and Access Management (IDAM) - TODO</h4>
+						<p>LDAP via OpenLDAP and LDAP Access Manager</p>
+						<p>Others (SAML, OIDC) via Keycloak</p>
 					</section>
-					<section>
-						<h3>PKI - Public Key Infrastructure</h3>
-						<ul>
-							<li>mkcert [RootCA -> Leaf]</li>
-							mkcert [dns] [dns] [ip] [ip]
 
-$ mkcert dns-entry-1 dns-entry-2 127.0.0.1 192.168.1.1
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Public Key Infrastructure</h4>
+						<p>mkcert</p>
+						<p>[RootCA] -> [Leaf]</p>
+						<ul>
+							<li>mkcert [hostname|fqdn|ip] [hostname|fqdn|ip] [hostname|fqdn|ip]</li>
+						</ul>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ mkcert dns-entry-1 dns-entry-2 127.0.0.1 192.168.1.1
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="min-height:17.0em;min-width: 30.0em;width: 53em;margin-left:-8em;">
 Created a new local CA 💥
 Note: the local CA is not installed in the system trust store.
 Run "mkcert -install" for certificates to be trusted automatically ⚠
@@ -667,25 +677,35 @@ Created a new certificate valid for the following names 📜
 The certificate is at "./dns-entry-1+3.pem" and the key at "./dns-entry-1+3-key.pem" ✅
 
 It will expire on 31 January 2028 🗓
-
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;width: 45em;margin-left:-4em;">
 $ ls
 dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
-
-
-***PRIVATE KEYS ARE NOT PASSWORD PROTECTED***
-
-want to start over - remove ~/.local/share/mkcert/*
-
-							<li>openssl More complex certificates</li>
-openssl genrsa -out rootCA.key 4096
-openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -subj "/CN=PDC Home Lab Root CA Testing/O=PDC/C=US" -out rootCA.pem
-openssl x509 -in rootCA.pem -text -noout
-
-
-							<li>kemo's PKI the hard way</li>
-						</ul>
+						</code></pre>
 					</section>
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Public Key Infrastructure</h4>
+						<p>mkcert</p>
+						<p>want to start over - remove ~/.local/share/mkcert/*</p>
+						<p>***PRIVATE KEYS ARE NOT PASSWORD PROTECTED***</p>
+					</section>
+				</section>
 
+				<section>
+					<section>
+						<h3>Final Thoughts - TODO</h3>
+						<h4>VMs vs Containers - TODO</h4>
+						<p>Sure, containers can be quicker, everything is already (mostly) baked in, 
+							but you'll still need a VM, you'll need to manage the container runtime, 
+							and if you forget to setup proper volume mounting, 
+							boom you could lose a bunch of data and configuration 
+							(unless of course if you want to test other automation against something like this).
+						</p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Final Thoughts - TODO</h3>
+						<p>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</p>
+					</section>
 				</section>
 
 				<section>
