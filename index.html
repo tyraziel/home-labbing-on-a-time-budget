@@ -303,7 +303,7 @@
 							<li class="fragment fade-in">Re-build from "scratch" <span class="fragment highlight-purple">relatively quickly</span></li>
 							<li class="fragment fade-in"><span class="fragment highlight-blue">Backup</span> and <span class="fragment highlight-blue">Recovery</span></li>
 							<li class="fragment fade-in"><span class="fragment highlight-orange">"Control"</span> Node in the Home Lab</li>
-							<li class="fragment fade-in">Minimize <span class="fragment highlight-red">MTTC</span></li>
+							<li class="fragment fade-in">Maximize <span class="fragment highlight-red">MTTC</span></li>
 						</ul>
 					</section>
 
@@ -425,6 +425,9 @@
 				</section>
 
 				<section>
+					<section style="padding-bottom:10em">
+						<h3>Automation</h3>
+					</section>
 					<section style="padding-bottom:10em">
 						<h4>The three D's of Automation</h4>
 						<p><span class="fragment fade-in"><span class="fragment highlight-red">Document</span>,</span> <span class="fragment fade-in"><span class="fragment highlight-green">Document</span></span> <span class="fragment fade-in">and <span class="fragment highlight-blue">Document!</span></span></p>
@@ -635,20 +638,23 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
 					</section>
 
 					<section style="padding-bottom:10em">
-						<h4>Cores Services - Domain Name System - TODO</h4>
-						<p>hosts files - simple, can get yucky, error prone, lack consistency</p>
-						<p>Router + Dynamic Host Control Protocol (and reservations) - manual intervention for every new server, IPs could collide (the roku takes a server's IP)</p>
-						<p>Avoid IP collisions on older DHCP reservations and resetting the router.</p>
-						<p>IP Blocks - DHCP claims a block and you claim a block for your homelab</p>
-
-
-						<p>Technitium</p>
+						<h4>Core Services - Domain Name System</h4>
+						<p class="fragment fade-in" style="font-size:0.85em">Host files work<span class="fragment fade-in">... <span class="fragment highlight-red">until they don't</span></span><span class="fragment fade-in">, they're <span class="fragment highlight-red">error-prone</span></span><span class="fragment fade-in"> and nearly impossible to keep <span class="fragment highlight-yellow">consistent across the fleet</span></span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">Routers with DHCP are great<span class="fragment fade-in">, but each new VM means more <span class="fragment highlight-red">manual intervention</span></span><span class="fragment fade-in">, and sometimes the Roku <span class="fragment highlight-orange">steals your IP</span></span></p>
+						<p class="fragment fade-in" style="font-size:0.75em"><em>(Or the other way, which reduces <span class="fragment highlight-red">MTTC to zero</span>!)</em></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Domain Name System</h4>
+						<p class="fragment fade-in" style="font-size:0.75em">Carve out a <span class="fragment highlight-blue">sizable</span> <span class="fragment highlight-purple">statically assignable</span> block of IPs for your homelab <span class="fragment fade-in"><em>(and leave the rest to your router's DHCP)</em></span></p>
+						<p class="fragment fade-in" style="font-size:0.75em">Assign those <span class="fragment highlight-purple">static IP addresses</span> with <span class="fragment highlight-blue">Technitium DNS</span> <span class="fragment fade-in">and point your homelab servers' <span class="fragment highlight-orange">DNS search domain</span> to your homelab zone</span><span class="fragment fade-in">, <span class="fragment highlight-green">primary DNS</span> to Technitium</span><span class="fragment fade-in">, and <span class="fragment highlight-yellow">fallback</span> to your router</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">Keep it <span class="fragment highlight-green">simple</span>, <span class="fragment highlight-purple">reliable</span>, and <span class="fragment highlight-blue">collision-free</span><span class="fragment fade-in">, and Technitium's API is <span class="fragment highlight-red">automatable!</span></span></p>
 					</section>
 
 					<section style="padding-bottom:10em">
 						<h4>Identity and Access Management (IDAM) - TODO</h4>
-						<p>LDAP via OpenLDAP and LDAP Access Manager</p>
-						<p>Others (SAML, OIDC) via Keycloak</p>
+						<p>Centralizing authentication has its pros and cons, but for something quick, use LDAP via OpenLDAP</p>
+						<p>You can automate users and groups in LDAP quickly and easily with ansible-core.</p>
+						<p>When you're looking to test out other protocols (i.e. SAML, OIDC) take a look at Keycloak</p>
 					</section>
 
 					<section style="padding-bottom:10em">
@@ -709,7 +715,7 @@ dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
 					<section style="padding-bottom:10em">
 						<h3>Recap &amp; Closing</h3>
 						<p>
-							<span class="fragment fade-in highlight-blue">Optimize Time</span><span class="fragment fade-in">, <span class="fragment highlight-blue">Design Smart</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Evaluate Goals</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Automate Early</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Stay Independent</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Be Flexible</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Document Everything</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Take Notes</span></span>
+							<span class="fragment fade-in"><span class="fragment highlight-blue">Optimize Time</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Design Smart</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Evaluate Goals</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Automate Early</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Stay Independent</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Be Flexible</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Document Everything</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Take Notes</span></span>
 						</p>
 					</section>
 					<section style="padding-bottom:10em">
