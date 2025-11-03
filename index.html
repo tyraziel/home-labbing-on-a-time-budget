@@ -651,10 +651,11 @@ resource "proxmox_vm_qemu" "tf-ubuntu-test" {
 					</section>
 
 					<section style="padding-bottom:10em">
-						<h4>Identity and Access Management (IDAM) - TODO</h4>
-						<p>Centralizing authentication has its pros and cons, but for something quick, use LDAP via OpenLDAP</p>
-						<p>You can automate users and groups in LDAP quickly and easily with ansible-core.</p>
-						<p>When you're looking to test out other protocols (i.e. SAML, OIDC) take a look at Keycloak</p>
+						<h4>Identity and Access Management (IDAM)</h4>
+						<p class="fragment fade-in" style="font-size:0.9em">Centralizing authentication has its <span class="fragment highlight-green">pros</span> and <span class="fragment highlight-red">cons</span><span class="fragment fade-in">, but for something <span class="fragment highlight-purple">quick</span> <span class="fragment highlight-blue">OpenLDAP</span> just works</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">You can <span class="fragment highlight-red">automate</span> users and groups in LDAP <span class="fragment highlight-purple">quickly</span> and <span class="fragment highlight-green">easily</span> with <span class="fragment highlight-blue">ansible-core</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">When you're ready to test <span class="fragment highlight-yellow">federated protocols</span> like <span class="fragment highlight-orange">SAML</span> or <span class="fragment highlight-orange">OIDC</span><span class="fragment fade-in">, <span class="fragment highlight-blue">Keycloak</span> makes a great “next step”</span></p>
+						<p class="fragment fade-in" style="font-size:0.70em"><em>(And if it breaks, it's probably just the redirect URI, or SSL certificates, again)</em></p>
 					</section>
 
 					<section style="padding-bottom:10em">
