@@ -696,19 +696,17 @@ dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
 
 				<section>
 					<section>
-						<h3>Final Thoughts - TODO</h3>
-						<h4>VMs vs Containers - TODO</h4>
-						<p>Sure, containers can be quicker, everything is already (mostly) baked in, 
-							but you'll still need a VM, you'll need to manage the container runtime, 
-							and if you forget to setup proper volume mounting, 
-							boom you could lose a bunch of data and configuration 
-							(unless of course if you want to test other automation against something like this).
-						</p>
+						<h3>Final Thoughts</h3>
 					</section>
 					<section style="padding-bottom:10em">
-						<h3>Final Thoughts - TODO</h3>
-						<p>Full 3 tier with HA exposition here - trade-offs, snapshotting with consistency, or do you want to learn how to set it up?</p>
-						<p>Diagram of gitea "3 tier" vs gitea with SQLite "All in One" (and was able to hook in LDAP)</p>
+						<h4>Three Tier vs All in One</h4>
+						<p style="padding-bottom:0em;margin-bottom:0em">A Case Study using Gitea</p>
+						<p class="fragment fade-in" style="margin-bottom:0em; margin-top:0em; padding-bottom:0em; padding-top:0.0em"><img src="./img/gitea-comparison.png" alt="gitea 3 tier and all in one comparison" style="margin-bottom:0em"/></p>
+						<ul style="font-size: 0.75em;">
+							<li class="fragment fade-in"><span class="fragment highlight-blue">All-in-one</span>: <span class="fragment highlight-purple">quicker</span> setup, <span class="fragment highlight-green">easier</span> rollback, perfect <span class="fragment highlight-purple">increment</span><span class="fragment fade-in"> and could migrate to three-tier later</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Three-Tier</span>: <span class="fragment highlight-yellow">Great</span> for systems level <span class="fragment highlight-orange">practice</span></li>
+						</ul>
+						<p class="fragment fade-in" style="font-size:0.65em"><em>(It all comes back to requirements and goals)</em></p>
 					</section>
 				</section>
 
