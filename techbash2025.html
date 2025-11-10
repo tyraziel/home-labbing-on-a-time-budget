@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Home Labbing on a Time Budget</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black-purple.css">
+		<link rel="stylesheet" href="dist/fragments.css">
+		<link rel="stylesheet" href="dist/footer.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+                    <section data-background-color="#005212" data-auto-animate>
+                        <p style="color: white; font-family: 'Arial', sans-serif; font-weight: bold; margin-top:-1.5em;font-size:0.55em">
+                            THE FOLLOWING PRESENTATION HAS BEEN <b style="font-size:1.25em">"APPROVED"</b> FOR<br/><b style="font-size:1.25em">APPROPRIATE AUDIENCES</b></br>BY THE <b style="font-size:1.25em">TECHBASH SPEAKERS</b> COMMITTEE
+                        </p>
+                        <p style="color: white; font-family: Arial, sans-serif; font-weight: bold; margin-top: 1em; font-size:0.55em">
+                            <b style="font-size:1.25em">MAY CONTAIN:</b><br>
+                            LESS THAN IDEAL SOLUTIONS,<br>
+							QUESTIONABLE SECURITY PRACTICES,<br>
+                            VIBES, A CODEX, QUIPS, FUNNY REMARKS, AI HALLUCINATIONS,<br>
+							A HIGH PROBABILITY OF UNFINISHED CODE AND EXAMP
+                        </p>
+                        <p style="color: white; font-family: Arial, sans-serif; font-weight: bold; font-size: 0.95em; margin-top: 1em;">
+                            THE PRESENTATION SHOWN HAS BEEN RATED
+                        </p>
+                        <div style="display: flex; justify-content: center; align-items: center; margin-top: 0.5em;">
+                        	<div style="background-color: #005212; padding: 0.00em 0.45em; font-size: 3em; font-weight: bold; color: white; border:3px solid white" class="rating-letter">
+	                            G
+                        	</div>
+                        	<div style="background-color: #005212; padding: 0.15em 1.25em; font-size: 1.5em; font-weight: bold; color: white; border:3px solid white" class="rating-label">
+                            	<div style="margin-bottom:0px;padding-bottom:0px;">GENERAL TECHBASH</div>
+                            	<div style="margin-top:-.30em;padding-top:0px;">ATTENDEES</div>
+                        	</div>
+                        </div>
+                        <div style="color: white; font-family: Arial, sans-serif; font-weight: bold; margin-top: 4.45em; font-size:0.45em">
+                        </div>
+                    </section>
+                </section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3 style="color:darkred">DISCLAIMER - PART 1</h3>
+						<p style="font-size:0.75em;">All views, opinions and stances, expressed or implied, are mine and mine alone and do not represent the views, opinions or stances of any employer or company, past, present or future.</p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="color:darkred">DISCLAIMER - PART 2</h3>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">This presentation is for <strong style="text-transform: uppercase;">educational and home lab use only</strong></p>  
+						<p style="font-size:0.75em; margin-bottom:2.0em;">This session focuses on time-saving home labbing strategies, not necessarily production grade security</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">It <strong style="text-transform: uppercase;">does not</strong> constitute professional security advice</p>
+    					<p style="font-size:0.75em; margin-bottom:2.0em;">Implementations and examples are <strong style="text-transform: uppercase;">lab only</strong></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="color:darkred">CODE NOTICE</h3>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">Sample code and configuration snippets in this session are provided under the <strong>MIT License</strong>, <em style="text-transform: uppercase;">as-is</em>, without warranty or guarantee of fitness for any purpose</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em;">Use responsibly and review before applying and/or executing</p>
+						<p style="font-size:0.75em; margin-bottom:2.0em; text-transform: uppercase;"><strong>You assume all risk associated with their use</strong></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="color:darkolivegreen">DISCLAIMER - PART 3</h3>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">No AI Assistants or homelabs were harmed in the making of this presentation</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">All activities were performed by <em>"trained professionals"</em> on closed networks</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;">Results may vary; your <strong style="text-transform: uppercase">uptime and harmony at home</strong> are not guaranteed</p>
+						<p class="fragment fade-in" style="font-size:0.95em; margin-bottom:1.0em;"><strong class="fragment highlight-red" style="text-transform: uppercase">Proceed at your own risk, you have been warned</strong></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="color:gray">AI Attribution</h3>
+						<div style="display: flex; align-items: center; white-space: nowrap; gap: 0.5rem; padding: 8px;">
+							<div style="font-family: IBM Plex Sans; font-weight: 400; font-size: 16px; line-height: 22px; letter-spacing: 0px; margin-left:-5.5em">
+								<a rel="noopener noreferrer" href="https://aiattribution.github.io/statements/AIA-Ph-SeCeNc-Hin-R-?model=OpenAI's%20GPT%252D5%20(ChatGPT)%2C%20Claude%20Code%20%5BSonnet%204%5D%2C%20Gemini%20%5BFlash%202.5%5D-v1.0" data-cy="recommended-attribution-statement-text" target="_blank" style="font-family: IBM Plex Sans; font-weight: 400; font-size: 16px; line-height: 22px; letter-spacing: 0px;">AIA Primarily human, Stylistic edits, Content edits, New content, Human-initiated, Reviewed, OpenAI's GPT-5 (ChatGPT), Claude Code [Sonnet 4], Gemini [Flash 2.5] v1.0 </a>
+							</div>
+							<div style="display: flex; gap: 0.5rem;">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<g clip-path="url(#clip0_50_18)">
+									<path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#525252">
+									</path>
+									<path d="M12 0C3.00001 0 -5.99999 12 6.00001 22L12 16L18 22C25 16 28 3 12 0Z" fill="white">
+									</path>
+									<path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" stroke="#161616">
+									</path>
+									<path d="M13.3318 11.74H10.6718V14.6H9.15184V7.61998H10.6718V10.4H13.3318V7.61998H14.8518V14.6H13.3318V11.74Z" fill="#161616">
+									</path>
+								</g>
+								<defs>
+									<clipPath id="clip0_50_18">
+									<rect width="24" height="24" fill="white">
+									</rect>
+									</clipPath>
+								</defs>
+								</svg>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								<path d="M18.8535 6.64652L17.3535 5.14652C17.3071 5.10007 17.252 5.06322 17.1913 5.03808C17.1307 5.01294 17.0656 5 17 5C16.9343 5 16.8693 5.01294 16.8087 5.03808C16.748 5.06322 16.6929 5.10007 16.6465 5.14652L13.7929 8.00002H12.5473C11.4072 8.0009 10.2955 8.3557 9.36562 9.01543C8.43576 9.67516 7.73364 10.6073 7.35618 11.6831L5.02808 18.335C4.99702 18.4239 4.99166 18.5197 5.01262 18.6114C5.03358 18.7032 5.08001 18.7871 5.14658 18.8537C5.21314 18.9202 5.29713 18.9666 5.38889 18.9875C5.48065 19.0085 5.57645 19.0031 5.66528 18.972L12.3171 16.6439C13.3929 16.2664 14.325 15.5642 14.9847 14.6343C15.6444 13.7045 15.9991 12.5928 16 11.4527V10.2071L18.8535 7.35352C18.8999 7.30711 18.9368 7.252 18.9619 7.19135C18.9871 7.13069 19 7.06568 19 7.00002C19 6.93436 18.9871 6.86934 18.9619 6.80869C18.9368 6.74803 18.8999 6.69293 18.8535 6.64652ZM15.1465 9.64652C15.0527 9.74026 15 9.86742 15 10V11.4527C14.9992 12.3855 14.7089 13.2951 14.1692 14.0559C13.6294 14.8167 12.8668 15.3912 11.9865 15.7L7.40268 17.3045L12 12.7071L11.2929 12L6.69568 16.5974L8.29998 12.0135C8.60883 11.1332 9.18331 10.3706 9.94411 9.83083C10.7049 9.29105 11.6145 9.00076 12.5473 9.00002H14C14.1326 8.99999 14.2597 8.94729 14.3535 8.85352L17 6.20707L17.7929 7.00002L15.1465 9.64652Z" fill="#161616">
+								</path>
+								</svg>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								<path d="M14 7H8V8H14V7Z" fill="#161616">
+								</path>
+								<path d="M14 9H8V10H14V9Z" fill="#161616">
+								</path>
+								<path d="M11 11H8V12H11V11Z" fill="#161616">
+								</path>
+								<path d="M10 16H8V17H10V16Z" fill="#161616">
+								</path>
+								<path d="M18.8535 13.6465L17.3535 12.1465C17.3071 12.1001 17.252 12.0632 17.1913 12.0381C17.1307 12.0129 17.0657 12 17 12C16.9343 12 16.8693 12.0129 16.8087 12.0381C16.748 12.0632 16.6929 12.1001 16.6465 12.1465L12 16.7929V19H14.2071L18.8535 14.3535C18.9 14.3071 18.9368 14.252 18.9619 14.1913C18.9871 14.1307 19 14.0657 19 14C19 13.9343 18.9871 13.8693 18.9619 13.8087C18.9368 13.748 18.9 13.6929 18.8535 13.6465ZM13.7929 18H13V17.2071L15.5 14.7071L16.2929 15.5L13.7929 18ZM17 14.7929L16.2071 14L17 13.2071L17.7929 14L17 14.7929Z" fill="#161616">
+								</path>
+								<path d="M10 19H7C6.73487 18.9997 6.48068 18.8943 6.2932 18.7068C6.10572 18.5193 6.00028 18.2651 6 18V6C6.00028 5.73487 6.10572 5.48068 6.2932 5.2932C6.48068 5.10572 6.73487 5.00028 7 5H15C15.2651 5.00028 15.5193 5.10572 15.7068 5.2932C15.8943 5.48068 15.9997 5.73487 16 6V11H15V6H7V18H10V19Z" fill="#161616">
+								</path>
+								</svg>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19 16.0002H17V14.0002H16V16.0002H14V17.0002H16V19.0002H17V17.0002H19V16.0002Z" fill="#161616">
+								</path>
+								<path d="M12 18.0002H8V6.00017H12V9.00017C12.0008 9.26515 12.1064 9.51906 12.2937 9.70643C12.4811 9.8938 12.735 9.99941 13 10.0002H16V12.0002H17V9.00017C17.0018 8.93446 16.9893 8.86913 16.9634 8.80871C16.9375 8.74828 16.8988 8.6942 16.85 8.65017L13.35 5.15017C13.306 5.10134 13.2519 5.06263 13.1915 5.03674C13.131 5.01084 13.0657 4.99836 13 5.00017H8C7.73502 5.00094 7.48111 5.10654 7.29374 5.29391C7.10637 5.48128 7.00077 5.73519 7 6.00017V18.0002C7.00077 18.2652 7.10637 18.5191 7.29374 18.7064C7.48111 18.8938 7.73502 18.9994 8 19.0002H12V18.0002ZM13 6.20017L15.8 9.00017H13V6.20017Z" fill="#161616">
+								</path>
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								</svg>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M18 17H16.5V16H18V8H16.5V7H18C18.2651 7.0003 18.5193 7.10576 18.7068 7.29323C18.8942 7.4807 18.9997 7.73488 19 8V16C18.9996 16.2651 18.8942 16.5193 18.7067 16.7067C18.5193 16.8942 18.2651 16.9996 18 17Z" fill="#161616">
+								</path>
+								<path d="M15.5 13C16.0523 13 16.5 12.5523 16.5 12C16.5 11.4477 16.0523 11 15.5 11C14.9477 11 14.5 11.4477 14.5 12C14.5 12.5523 14.9477 13 15.5 13Z" fill="#161616">
+								</path>
+								<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" fill="#161616">
+								</path>
+								<path d="M8.5 13C9.05228 13 9.5 12.5523 9.5 12C9.5 11.4477 9.05228 11 8.5 11C7.94772 11 7.5 11.4477 7.5 12C7.5 12.5523 7.94772 13 8.5 13Z" fill="#161616">
+								</path>
+								<path d="M7.5 17H6C5.73488 16.9997 5.4807 16.8942 5.29323 16.7068C5.10576 16.5193 5.0003 16.2651 5 16V8C5.00026 7.73486 5.10571 7.48066 5.29319 7.29319C5.48066 7.10571 5.73486 7.00026 6 7H7.5V8H6V16H7.5V17Z" fill="#161616">
+								</path>
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								</svg>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="12" cy="12" r="11.5" stroke="#161616">
+								</circle>
+								<path d="M10 6C10.4945 6 10.9778 6.14662 11.3889 6.42133C11.8 6.69603 12.1205 7.08648 12.3097 7.54329C12.4989 8.00011 12.5484 8.50277 12.452 8.98773C12.3555 9.47268 12.1174 9.91814 11.7678 10.2678C11.4181 10.6174 10.9727 10.8555 10.4877 10.952C10.0028 11.0484 9.50011 10.9989 9.04329 10.8097C8.58648 10.6205 8.19603 10.3 7.92133 9.88893C7.64662 9.4778 7.5 8.99445 7.5 8.5C7.5 7.83696 7.76339 7.20107 8.23223 6.73223C8.70107 6.26339 9.33696 6 10 6ZM10 5C9.30777 5 8.63108 5.20527 8.0555 5.58986C7.47993 5.97444 7.03133 6.52107 6.76642 7.16061C6.50151 7.80015 6.4322 8.50388 6.56725 9.18282C6.7023 9.86175 7.03564 10.4854 7.52513 10.9749C8.01461 11.4644 8.63825 11.7977 9.31718 11.9327C9.99612 12.0678 10.6999 11.9985 11.3394 11.7336C11.9789 11.4687 12.5256 11.0201 12.9101 10.4445C13.2947 9.86892 13.5 9.19223 13.5 8.5C13.5 7.57174 13.1313 6.6815 12.4749 6.02513C11.8185 5.36875 10.9283 5 10 5Z" fill="#161616">
+								</path>
+								<path d="M15 19H14V16.5C14 15.837 13.7366 15.2011 13.2678 14.7322C12.7989 14.2634 12.163 14 11.5 14H8.5C7.83696 14 7.20107 14.2634 6.73223 14.7322C6.26339 15.2011 6 15.837 6 16.5V19H5V16.5C5 15.5717 5.36875 14.6815 6.02513 14.0251C6.6815 13.3687 7.57174 13 8.5 13H11.5C12.4283 13 13.3185 13.3687 13.9749 14.0251C14.6313 14.6815 15 15.5717 15 16.5V19Z" fill="#161616">
+								</path>
+								<path d="M16.5 12.09L15.205 10.795L14.5 11.5L16.5 13.5L20 10L19.295 9.295L16.5 12.09Z" fill="#161616">
+								</path>
+								</svg>
+							</div>
+						</div>
+
+						<p style="font-size:0.5em; text-align:justify">This work was primarily human-created. AI was used to make stylistic edits, such as changes to structure, wording, and clarity. AI was used to make content edits, such as changes to scope, information, and ideas. AI was used to make new content, such as text, images, analysis, and ideas. AI was prompted for its contributions, or AI assistance was enabled. AI-generated content was reviewed and approved. The following model(s) or application(s) were used: OpenAI's GPT-5 (ChatGPT), Claude Code [Sonnet 4], Gemini [Flash 2.5].</p>
+						<p style="font-size:0.25em; text-align:justify">https://aiattribution.github.io/statements/AIA-Ph-SeCeNc-Hin-R-?model=OpenAI%27s%20GPT%252D5%20(ChatGPT)%2C%20Claude%20Code%20%5BSonnet%204%5D%2C%20Gemini%20%5BFlash%202.5%5D-v1.0</p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="color:darkolivegreen">The Law of Two Feet</h3>
+						<p class="fragment fade-in" style="font-size:0.75em; margin-bottom:1.0em;">You deserve to get the most value out of your conference experience.</p>
+						<p class="fragment fade-in" style="font-size:0.75em; margin-bottom:1.0em;">If this session isn't what you were expecting, or you think you'll get more value from a different session, please do not feel obligated to stay.</p>
+						<p class="fragment fade-in" style="font-size:0.75em; margin-bottom:1.0em;">I'd rather you get the most out of your time at this conference.</p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Home Labbing on a <span class="fragment highlight-purple">Time</span> Budget</h4>
+						<p class="fragment fade-in">Andrew Potozniak</p>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em;">
+						<h4>About Me</h4>
+						<ul>
+							<li class="fragment fade-in">Family</li>
+							<li class="fragment fade-in">Coaching</li>
+							<li class="fragment fade-in">Hobbies
+								<ul class="fragment fade-in">
+									<li>Gaming <span class="fragment fade-in">(playing and designing, board games and video games)</span><span class="fragment fade-in">, Sports</span><span class="fragment fade-in">, Hiking</span><span class="fragment fade-in">, Home Labbing</span><span class="fragment fade-in">,<br/>Blackstone Cooking</span></li>
+								</ul>
+							</li>
+							<li class="fragment fade-in">Vibe-Coder 1.z3r0</li>
+							<li class="fragment fade-in">Blogger and Streamer</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:2em"><p class="fragment fade-in"><em>[ TODO: INSERT WELL TIMED JOKE SLIDE "creating a conference presentation on a time budget" ]</em></p></section>
+					<section style="padding-bottom:10em">
+						<h4><i style="text-decoration:line-through;color:gray" class="fragment">Home Labbing</i> <i class="fragment"><span class="fragment highlight-orange">Creating a Presentation</span> for TechBash on a <span class="fragment highlight-purple">Time</span> Budget</i></h4>
+						<p class="fragment fade-in">Andrew Potozniak</p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>Home Labbing on a <span class="fragment highlight-purple">Time</span> Budget</h4>
+						<p class="fragment fade-in">Andrew Potozniak</p>
+					</section>
+				</section>
+				
+				<section>
+					<section style="padding-bottom:10em">
+						<h2>Overview</h2>
+						<ul>
+							<li class="fragment">Key <span class="fragment highlight-yellow">Takeaways</span></li>
+							<li class="fragment">What is <span class="fragment highlight-purple">Home Labbing</span></li>
+							<li class="fragment"><span class="fragment highlight-green">Requirements</span></li>
+							<li class="fragment"><span class="fragment highlight-blue">Tips</span> &amp; <span class="fragment highlight-blue">Tricks</span></li>
+							<li class="fragment"><span class="fragment highlight-red">Automation</span></li>
+							<li class="fragment"><span class="fragment highlight-orange">Core</span> Services</li>
+							<li class="fragment"><span class="fragment highlight-purple">Recap</span> &amp; <span class="fragment highlight-red">Closing</span></li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h2>Key Takeaways</h2>
+						<ul style="font-size: 0.85em;">
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Optimize Time</strong><span class="fragment">: Apply <span class="fragment highlight-yellow">practical shortcuts</span> and <span class="fragment highlight-yellow">workflows</span> that keep your lab <span class="fragment highlight-green">useful</span> without turning it into a <span class="fragment highlight-red">second job</span></span>
+							</li>
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Design Smart</strong><span class="fragment">: <span class="fragment highlight-green">Identify</span> which services matter most and <span class="fragment highlight-green">scope</span> your lab to match your <span class="fragment highlight-purple">time budget</span></span>
+								<ul class="fragment">
+									<li>DNS, PKI, IDAM vs Git Repository, Artifact Repository, etc</li>
+								</ul>
+							</li>
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Evaluate Goals</strong><span class="fragment">: Is it a <span class="fragment highlight-orange">nice to have</span>, or am I doing this to <span class="fragment highlight-purple">learn</span> or to <span class="fragment highlight-purple">achieve</span> a concrete <span class="fragment highlight-green">goal?</span>  <p style="font-size:0.85em" class="fragment fade-in"><em>(Do I really need that full 3 tiered and HA design for [system] (i.e. gitea), or will an all-in-one approach with SQLite be enough?)</em></p></span>
+							</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h2>Key Takeaways</h2>
+						<ul style="font-size: 0.85em;">
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Automate Early</strong><span class="fragment">: Use <span class="fragment highlight-orange">automation</span> to <span class="fragment highlight-green">simplify</span> <span class="fragment highlight-yellow">setup</span>, <span class="fragment highlight-yellow">maintenance</span>, and <span class="fragment highlight-yellow">patching</span>, so your lab doesn't eat into <span class="fragment highlight-purple">family or other free time</span></span>
+							</li>
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Stay Independent</strong><span class="fragment">: Build your lab on <span class="fragment highlight-yellow">self-hosted tools</span> instead of relying on cloud/external solutions <em class="fragment fade-in">(as best as you can)</em></span>
+							</li>
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Be Flexible</strong><span class="fragment">: You can always <span class="fragment highlight-yellow">pivot</span> and <span class="fragment highlight-yellow">iterate</span> as you <span class="fragment highlight-purple">learn</span></span>
+							</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h2>Key Takeaways</h2>
+						<ul style="font-size: 0.85em;">
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Document Everything</strong><span class="fragment">: You figured it all out <span class="fragment highlight-orange">at least once</span>, so why <span class="fragment highlight-purple">waste time</span> figuring it out again?</span>
+							</li>
+							<li class="fragment" style="margin-bottom:0.5em;">
+								<strong class="fragment highlight-blue">Take Notes</strong><span class="fragment">: <span class="fragment highlight-green">Trust me</span>, you'll rely on <span class="fragment highlight-purple">your notes</span> more than you'll know</span>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>What is Home Labbing?</h3>
+						<p class="fragment fade-in"><span class="fragment highlight-purple">Home labbing</span> is the <span class="fragment highlight-yellow"><em>wonderfully</em></span> <span class="fragment highlight-yellow">expensive</span> <span class="fragment highlight-yellow">hobby</span> where you turn your extra hardware into a small-scale <span class="fragment highlight-blue">"data center"</span></p>
+						<p class="fragment fade-in"><em>(and occasionally, a space heater)</em></p>
+						<p class="fragment fade-in">Usually built to <span class="fragment highlight-green">learn</span> and <span class="fragment highlight-orange">experiment</span> with <span class="fragment highlight-blue">technology</span></p>
+						<p class="fragment fade-in"><em>(also to justify that "old" server in the basement)</em></p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3>Why do I home lab?</h3>
+						<ul>
+						<li class="fragment fade-in">To <span class="fragment highlight-purple">Learn</span></li>
+						<li class="fragment fade-in">To be able to <span class="fragment highlight-blue">Experiment</span> in a <span class="fragment highlight-red">Zero Risk</span> environment</li>
+						</ul>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="margin-bottom:0em">My Home Lab</h3>
+						<p style="margin-bottom:0em; margin-top:0em; padding-bottom:0em"><img src="./img/homelab.jpg" alt="ms-01s" style="width:450px; margin-bottom:0em"/></p>
+						<p style="margin-top:0em" class="fragment fade-in"><img src="./img/homelab-resources.png" alt="proxmox resources" style="width:400px; margin-top:0em"/></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="margin-bottom:0em">My Home Lab</h3>
+						<p style="margin-top:0em"><img src="./img/homelab-diagram.png" alt="the-diagram" style="width:500px;"/></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="margin-bottom:0em">My Home Network</h3>
+						<p style="margin-top:0em"><img src="./img/home-network-diagram.png" alt="Home Network Diagram" style="width:700px;"/></p>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>My requirements</h1>
+						<ul style="font-size: 0.85em;">
+							<li class="fragment fade-in">Not <span class="fragment highlight-red">exposed</span> to the Internet</li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Zero 9s</span> of availability</li>
+							<li class="fragment fade-in"><span class="fragment highlight-green">Simpler</span> is better</li>
+							<li class="fragment fade-in"><span class="fragment highlight-purple">Minimal reliance</span> on cloud</li>
+							<li class="fragment fade-in">Feel the <span class="fragment highlight-red">"pains"</span> of an enterprise</li>
+							<li class="fragment fade-in">Something that I can <span class="fragment highlight-purple">drop and pick up months later</span></li>
+							<li class="fragment fade-in">Re-build from "scratch" <span class="fragment highlight-purple">relatively quickly</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Backup</span> and <span class="fragment highlight-blue">Recovery</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-orange">"Control"</span> Node in the Home Lab</li>
+							<li class="fragment fade-in">Maximize <span class="fragment highlight-red">MTTC</span></li>
+						</ul>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3>What are your requirements?</h3>
+							<p class="fragment fade-in"><span class="fragment highlight-green">Write down</span> your <span class="fragment highlight-orange">requirements</span> in a <span class="fragment highlight-purple">TODO</span> list.</p>
+							<p class="fragment fade-in">It will help you with <span class="fragment highlight-red">scope creep</span>, and help you avoid the <span class="fragment highlight-yellow">shiny object</span></p>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Naming Convention</h3>
+						<blockquote class="fragment fade-in" style="font-size:0.85em">There are only <span class="fragment highlight-red">two</span> hard things in Computer Science: <span class="fragment highlight-orange">cache invalidation</span> and <span class="fragment highlight-purple">naming things</span> <span class="fragment fade-in">, and <span class="fragment highlight-red">off-by-one</span> errors.</span></span></blockquote>
+						<ul class="fragment" style="font-size:0.85em">
+							<li>Phil Karlton</li>
+							<li>Jeff Atwood / Leon Bambrick</li>
+						</ul>
+						<blockquote class="fragment fade-in" style="font-size:0.85em;margin-top:2.0em"><span class="fragment highlight-yellow">You're exactly right</span>, and <span class="fragment highlight-red">AI Hallucinations</span>.</blockquote>
+						<ul class="fragment" style="font-size:0.85em">
+							<li>Andrew Potozniak</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Naming Convention</h3>
+						<p class="fragment fade-in" style="font-size:0.85em">Something <span class="fragment highlight-blue">meaningful</span>, <span class="fragment highlight-blue">concise</span> that contains server <span class="fragment highlight-blue">numbering</span>.</p>
+						<p class="fragment fade-in" style="padding-bottom:0.0em;margin-bottom:0.0em">homelab<span class="fragment fade-in">-<span class="fragment highlight-yellow">[vm purpose or system]</span></span><span class="fragment fade-in">-<span class="fragment highlight-yellow">[0000]</span></span></p>
+						<ul style="font-size:0.75em;padding-top:0.0em;margin-top:0.0em;">
+							<li class="fragment fade-in">homelab-dns-0001</li>
+							<li class="fragment fade-in">homelab-ldap-0001</li>
+							<li class="fragment fade-in">homelab-testldap-0001</li>
+						</ul>
+						
+						<p class="fragment fade-in" style="padding-bottom:0.0em;margin-bottom:0.0em">homelab<span class="fragment fade-in">-<span class="fragment highlight-yellow">[os]-[version]</span></span><span class="fragment fade-in">-base</span></p>
+						<ul style="font-size:0.75em;padding-top:0.0em;margin-top:0.0em;">
+							<li class="fragment fade-in">homelab-ubuntu-24-base</li>
+							<li class="fragment fade-in">homelab-ubuntu-22-base</li>
+							<li class="fragment fade-in">homelab-slackware-15-base</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Numbering Convention</h3>
+						<p class="fragment fade-in">vmids</p>
+						<ul>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">900s</span> for <span class="fragment highlight-blue">templates</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-orange">000s</span> for <span class="fragment highlight-orange">core services</span></li>
+							<li class="fragment fade-in"><em><span class="fragment highlight-yellow">404</span> for servers that have <span class="fragment highlight-yellow">gone missing</em></li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Passwords</h3>
+						<p class="fragment fade-in" style="font-size:0.85em">Come up with some <span class="fragment highlight-yellow">memorable</span> <span class="fragment highlight-yellow">clever</span> scheme for the <span class="fragment highlight-blue">passwords</span> for accounts within your <span class="fragment highlight-purple"> home lab</span><span class="fragment fade-in">, but <span class="fragment highlight-orange">different</span> from everything else you use, and not the <span class="fragment highlight-orange">defaults</span>, or '<span class="fragment highlight-orange">password</span>'</span></p>
+						<p class="fragment fade-in" style="margin-top:2.5em; margin-bottom:0.0em; padding-bottom:0.0em"><span class="fragment highlight-red">DISCLAIMER</span></p>
+						<p class="fragment fade-in" style="margin-top:0.0em; padding-top:0.0em">This is <span class="fragment highlight-red">NOT</span> <span class="fragment highlight-red">security advice</span><span class="fragment fade-in"> <em>(seriously, it's not)</em></span></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Directory Structure</h3>
+						<p class="fragment fade-in">Have a <span class="fragment highlight-green">good memorable structure</span> so you're not <span class="fragment highlight-red">chasing down</span> documents, playbooks or scripts.</p>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							home-lab-management/                                                               
+							├── ansible/
+							│   ├── guest-vm/
+							│   │   ├── gvm_generate_ssh_keys.yml
+							│   │   ├── gvm_patching_apt.yml
+							│   │   ├── gvm_patching_dnf.yml
+							│   │   ├── gvm_simple_ping.yml
+							│   │   ├── gvm_update_etc_hosts.yml
+							│   │   ├── gvm_update_network_netplan.yml
+							│   │   └── gvm_update_network_nmcli.yml
+							│   ├── host/
+							│   │   └── host_patching_apt.yml
+							│   ├── proxmox/
+							│   │   ├── pxmx_create_vms_from_template.yml
+							│   │   ├── pxmx_get_vms_state.yml
+							│   │   ├── pxmx_migrate_vms.yml
+							│   │   ├── pxmx_remove_vms.yml
+							│   │   ├── pxmx_restart_vms.yml
+							│   │   ├── pxmx_snapshot_vms.yml
+							│   │   ├── pxmx_start_vms.yml
+							│   │   ├── pxmx_stop_nodes.yml
+							│   │   ├── pxmx_stop_vms.yml
+							│   │   ├── pxmx_update_cpu_vms.yml
+							│   │   └── pxmx_update_memory_vms.yml
+							│   └── systems/
+							│       ├── control/
+							│       │   └── bootstrap_control_ubuntu.yml
+							│       ├── dns/
+							│       │   ├── assign_next_available_ip_technitium.yml
+							│       │   ├── bootstrap_technitium.yml
+							│       │   ├── create_a_record_technitium.yml
+							│       │   └── install_technitium_ubuntu.yml
+							│       ├── keycloak/
+							│       │   └── install_keycloak.yml
+							│       └── ldap/
+							│           ├── install_ldap_account_manager_ubuntu.yml
+							│           ├── install_openldap_ubuntu.yml
+							│           └── setup_ldap_directory.yml
+							└── terraform/
+								└── proxmox/
+									└── ubuntu/
+										├── multi-vm/
+										│   ├── 000_variables.tf
+										│   ├── 001_provider.tf
+										│   ├── 002_vm_build.tf
+										│   └── 003_output.tf
+										└── single-vm/
+											├── 000_variables.tf
+											├── 001_provider.tf
+											├── 002_vm_build.tf
+											└── 003_output.tf
+						</code></pre>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Quick Tips - Command History</h3>
+						<p class="fragment fade-in">When you've <span class="fragment highlight-orange"><em>forgotten to write things down</em></span><span class="fragment fade-in">, the <span class="fragment highlight-green">command history</span> is your best friend</span></p>
+						<p class="fragment fade-in" style="margin-top:2.0em">fzf <span class="fragment fade-in">- command-line fuzzy finder </span><span class="fragment fade-in">https://github.com/junegunn/fzf</span></p>
+						<p class="fragment fade-in" style="font-size: 0.85em;">If you take away anything from this presentation<span class="fragment fade-in">, fzf is one of the best utilities that I use on a daily basis to <span class="fragment highlight-purple">save time</span></span></p>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>Automation</h3>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>The three D's of Automation</h4>
+						<p><span class="fragment fade-in"><span class="fragment highlight-red">Document</span>,</span> <span class="fragment fade-in"><span class="fragment highlight-green">Document</span></span> <span class="fragment fade-in">and <span class="fragment highlight-blue">Document!</span></span></p>
+						<p><span class="fragment fade-in">WRITE</span> <span class="fragment fade-in">IT</span> <span class="fragment fade-in">DOWN</span><span class="fragment fade-in">!!!</span>
+						<p class="fragment fade-in" style="font-size: 0.95em;"><span class="fragment highlight-yellow">Documentation</span> <em>is</em> "<span class="fragment highlight-red">automation</span>" when <span class="fragment highlight-purple">time is limited</span> <span class="fragment fade-in">and it's the <span class="fragment highlight-blue">blueprint</span> for the <span class="fragment highlight-red">automation</span> you'll do later</span></p>
+						<p class="fragment fade-in" style="font-size: 0.75em; margin-top:2.0em"><em>(If it's 2am and you can rebuild it from your notes, you're doing it right)</em></p>
+						<p class="fragment fade-in" style="font-size: 0.75em;"><em>(... and when you can't automate, you've left future-you a trail to follow)</em></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>What to do if you can't automate</h4>
+						<p class="fragment fade-in" style="font-size: 0.95em; margin-top:1.5em"><span class="fragment highlight-yellow">Document</span> the steps like a <span class="fragment highlight-purple">walkthru</span><span class="fragment fade-in">, or at least enough to <span class="fragment highlight-green">pass</span> the <span class="fragment highlight-red">2am test</span></span></p>
+						<p class="fragment fade-in" style="font-size: 0.75em; margin-top:2.0em">A few examples of things that might not be automatable:</p>
+						<ul style="font-size: 0.75em;">
+							<li class="fragment fade-in">proxmox install</li>
+							<li class="fragment fade-in">re-networking with SFPs</li>
+							<li class="fragment fade-in">my router configurations</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>My Flow for a New VM</h3>
+						<ul style="list-style: none; font-size:0.75em">
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_create_vms_from_template.yml</li>
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_start_vms.yml</li>
+							<li class="fragment fade-in">./ansible/systems/dns/assign_next_available_ip_technitium.yml</li>
+							<li class="fragment fade-in">./ansible/guest-vm/gvm_update_network_netplan.yml</li>
+							<li class="fragment fade-in">./ansible/guest-vm/gvm_patching_apt.yml</li>
+							<li class="fragment fade-in">./ansible/proxmox/pxmx_snapshot_vms.yml</li>
+						</ul>
+						<p class="fragment fade-in" style="font-size:0.80em"><span class="fragment highlight-yellow">New server</span> <span class="fragment highlight-green">ready</span> to go in about <span class="fragment highlight-green">5:30</span> <span class="fragment fade-in"><em>(with <span class="fragment highlight-red">2:30</span> spent on <span class="fragment highlight-blue">patching</span>)</em></span></p>
+						<p class="fragment fade-in" style="font-size:0.80em"><em>(Pre-work was performed to create the template)</em></p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core</h3>
+						<ul>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-red">Agentless</span> <span class="fragment fade-in highlight-red">Automation</span></li>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-blue">Playbooks</span> written in <span class="fragment fade-in highlight-green">YAML</span></li>
+							<li class="fragment fade-in">$<span class="fragment fade-in highlight-yellow"> ansible-playbook</span></li>
+						</ul>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core - os patching</h3>
+						<pre class="fragment fade-in" style="margin-bottom:2.0em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook gvm_patching_apt.yml
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+---
+- name: Patch Guest VM (apt)
+  hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Update APT Packages
+      ansible.builtin.apt:
+        name: "*"
+        update_cache: true
+        state: "latest"
+      notify:
+      - Reboot Host
+
+  handlers:
+    - name: Reboot Host
+      ansible.builtin.reboot:
+        msg: "OS Patching completed, rebooting"
+        reboot_timeout: 1800
+						</code></pre>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">ansible-core - install openldap</h3>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook install_openldap_ubuntu.yml
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+---
+- name: Install OpenLDAP Server
+  hosts: all
+  gather_facts: false
+  become: true
+  
+  #Removed vars section for presentation
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        name: debconf-utils
+        state: present
+
+    - name: Install slapd and ldap-utils
+      ansible.builtin.shell: echo 'slapd/root_password password {{ slapd_admin_password }}' | debconf-set-selections && echo 'slapd/root_password_again password {{ slapd_admin_password }}' | debconf-set-selections && DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
+
+    - name: Reconfigure slapd
+      ansible.builtin.shell: echo "slapd slapd/no_configuration boolean false" | debconf-set-selections && echo "slapd slapd/domain string {{ ldap_domain }}" | debconf-set-selections && echo "slapd slapd/password1 password {{ slapd_admin_password }}" | debconf-set-selections && echo "slapd slapd/password2 password {{ slapd_admin_password }}" | debconf-set-selections && echo "slapd slapd/purge_database boolean false" | debconf-set-selections && echo "slapd slapd/allow_ldap_v2 boolean false" | debconf-set-selections && echo "slapd slapd/move_old_database boolean true" | debconf-set-selections && dpkg-reconfigure -f noninteractive slapd
+
+    - name: Run slapcat
+      ansible.builtin.shell: slapcat
+      register: slapcat_output
+
+    - name: Validate ldap config
+      ansible.builtin.assert:
+        that: 
+          - slapcat_output.stdout is search(ldap_domain.split('.')[0])
+          - slapcat_output.stdout is search(ldap_domain.split('.')[1])
+        fail_msg: "LDAP was not configured correctly:  {{ slapcat_output.stdout | default ('NO_STDOUT_AVAILABLE') }}"
+        success_msg: "LDAP Configured Correctly!"
+						</code></pre>
+						<pre class="fragment fade-in" style="margin-bottom:2.0em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ ansible-playbook setup_ldap_directory.yml
+						</code></pre>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">terraform-cli</h3>
+						<ul>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-purple">Infrastructure</span> <span class="fragment fade-in highlight-purple">as</span> <span class="fragment fade-in highlight-purple">Code</span></li>
+							<li class="fragment fade-in"><span class="fragment fade-in highlight-blue">Configuration</span> written in <span class="fragment fade-in highlight-purple">HCL</span></li>
+							<li class="fragment fade-in">$<span class="fragment fade-in highlight-yellow"> terraform</span></li>
+						</ul>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h3 style="text-transform: lowercase;">terraform-cli - single vm</h3>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ terraform apply
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+resource "proxmox_vm_qemu" "tf-ubuntu-test" {
+  name        = "${var.vm_guest_name}"
+  desc        = "A VM created for terraform testing."
+  target_node = var.proxmox_target_node
+  tags        = null
+
+  clone      = var.clone_name
+  full_clone = true
+
+  disk {
+    type       = "disk"
+    storage    = "local-lvm"
+    slot       = "scsi0"
+    size       = "40G"
+    emulatessd = true
+    discard    = true
+    iothread   = true
+    format     = "raw"
+  }
+
+  network {
+    id     = 0
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+
+  bios      = "ovmf"
+  agent     = 1
+
+  cores     = 4
+  sockets   = 1
+  memory    = 8192
+
+  hotplug   = "disk,network,usb"
+
+  scsihw    = "virtio-scsi-single"
+
+  os_type   = var.os_type
+  ipconfig0 = "ip=dhcp"
+
+  skip_ipv6 = true
+  
+}
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ terraform destroy
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>Core Services</h3>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Virtual Machine Templates</h4>
+						<p class="fragment fade-in" style="font-size:0.70em">You might spend a <span class="fragment highlight-red">lot of time</span> creating templates<span class="fragment fade-in">, but it's <span class="fragment highlight-yellow">worth it</span></span><span class="fragment fade-in">, your vms will be <span class="fragment highlight-green">consistent</span></span><span class="fragment fade-in">, and you'll be able to spin up new servers <span class="fragment highlight-purple">in minutes</span>!</span></p>
+						<ul style="font-size:0.75em">
+							<li class="fragment fade-in">user account</li>
+							<li class="fragment fade-in">ssh keys</li>
+							<li class="fragment fade-in">sudoers</li>
+							<li class="fragment fade-in">motd</li>
+							<li class="fragment fade-in">rootCA trust</li>
+							<li class="fragment fade-in">patching</li>
+							<li class="fragment fade-in">sysprep/sealing <span class="fragment fade-in"><em>(SSH Host Keys, logs, machine UUID, etc)</em></span></li>
+						</ul>
+						<p class="fragment fade-in" style="font-size:0.70em">"Re-templating" can be <span class="fragment highlight-purple">quick</span>, albeit <span class="fragment highlight-red">manual</span></p>
+						<p class="fragment fade-in" style="font-size:0.5em"><em>(packer is on my list of things to get working, if you have this working, I'd love to talk with you afterwards!)</em></p>
+					</section>
+				
+					<section style="padding-bottom:10em">
+						<h4>Core Services - The Control Node</h4>
+						<ul>
+							<li class="fragment fade-in">The <span class="fragment highlight-red">Automator</span></li>
+							<li class="fragment fade-in">The Certificate <span class="fragment highlight-yellow">Authority</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Testing</span></li>
+						</ul>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Domain Name System</h4>
+						<p class="fragment fade-in" style="font-size:0.85em">Host files work<span class="fragment fade-in">... <span class="fragment highlight-red">until they don't</span></span><span class="fragment fade-in">, they're <span class="fragment highlight-red">error-prone</span></span><span class="fragment fade-in"> and nearly impossible to keep <span class="fragment highlight-yellow">consistent across the fleet</span></span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">Routers with DHCP are great<span class="fragment fade-in">, but each new VM means more <span class="fragment highlight-red">manual intervention</span></span><span class="fragment fade-in">, and sometimes the Roku <span class="fragment highlight-orange">steals your IP</span></span></p>
+						<p class="fragment fade-in" style="font-size:0.75em"><em>(Or the other way, which reduces <span class="fragment highlight-red">MTTC to zero</span>!)</em></p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Domain Name System</h4>
+						<p class="fragment fade-in" style="font-size:0.75em">Carve out a <span class="fragment highlight-blue">sizable</span> <span class="fragment highlight-purple">statically assignable</span> block of IPs for your homelab <span class="fragment fade-in"><em>(and leave the rest to your router's DHCP)</em></span></p>
+						<p class="fragment fade-in" style="font-size:0.75em">Assign those <span class="fragment highlight-purple">static IP addresses</span> with <span class="fragment highlight-blue">Technitium DNS</span> <span class="fragment fade-in">and point your homelab servers' <span class="fragment highlight-orange">DNS search domain</span> to your homelab zone</span><span class="fragment fade-in">, <span class="fragment highlight-green">primary DNS</span> to Technitium</span><span class="fragment fade-in">, and <span class="fragment highlight-yellow">fallback</span> to your router</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">Keep it <span class="fragment highlight-green">simple</span>, <span class="fragment highlight-purple">reliable</span>, and <span class="fragment highlight-blue">collision-free</span><span class="fragment fade-in">, and Technitium's API is <span class="fragment highlight-red">automatable!</span></span></p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Identity and Access Management (IDAM)</h4>
+						<p class="fragment fade-in" style="font-size:0.9em">Centralizing authentication has its <span class="fragment highlight-green">pros</span> and <span class="fragment highlight-red">cons</span><span class="fragment fade-in">, but for something <span class="fragment highlight-purple">quick</span> <span class="fragment highlight-blue">OpenLDAP</span> just works</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">You can <span class="fragment highlight-red">automate</span> users and groups in LDAP <span class="fragment highlight-purple">quickly</span> and <span class="fragment highlight-green">easily</span> with <span class="fragment highlight-blue">ansible-core</span></p>
+						<p class="fragment fade-in" style="font-size:0.85em">When you're ready to test <span class="fragment highlight-yellow">federated protocols</span> like <span class="fragment highlight-orange">SAML</span> or <span class="fragment highlight-orange">OIDC</span><span class="fragment fade-in">, <span class="fragment highlight-blue">Keycloak</span> makes a great “next step”</span></p>
+						<p class="fragment fade-in" style="font-size:0.70em"><em>(And if it breaks, it's probably just the redirect URI, or SSL certificates, again)</em></p>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<h4>Core Services - Public Key Infrastructure</h4>
+						<p class="fragment fade-in">mkcert</p>
+						<p class="fragment fade-in">[<span class="fragment highlight-orange">RootCA</span>] -> [<span class="fragment highlight-green">Leaf</span>]</p>
+						<pre class="fragment fade-in" style="margin-top:4.5em"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ mkcert [hostname|fqdn|ip] [hostname|fqdn|ip] ...
+						</code></pre>
+					</section>
+
+					<section style="padding-bottom:10em">
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;">
+							$ mkcert dns-entry-1 dns-entry-2 127.0.0.1 192.168.1.1
+						</code></pre>
+						
+						<pre class="fragment fade-in"><code data-trim data-noescape style="min-height:17.0em;min-width: 30.0em;width: 53em;margin-left:-8em;">
+Created a new local CA 💥
+Note: the local CA is not installed in the system trust store.
+Run "mkcert -install" for certificates to be trusted automatically ⚠
+
+Created a new certificate valid for the following names 📜
+ - "dns-entry-1"
+ - "dns-entry-2"
+ - "127.0.0.1"
+ - "192.168.1.1"
+
+The certificate is at "./dns-entry-1+3.pem" and the key at "./dns-entry-1+3-key.pem" ✅
+
+It will expire on 31 January 2028 🗓
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape style="max-height: 15.0em;width: 45em;margin-left:-4em;">
+$ ls
+dns-entry-1+3-key.pem  dns-entry-1+3.pem  rootCA-key.pem  rootCA.pem
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Final Thoughts</h3>
+					</section>
+					<section style="padding-bottom:10em">
+						<h4>Three Tier vs All in One</h4>
+						<p style="padding-bottom:0em;margin-bottom:0em">A Case Study using Gitea</p>
+						<p class="fragment fade-in" style="margin-bottom:0em; margin-top:0em; padding-bottom:0em; padding-top:0.0em"><img src="./img/gitea-comparison.png" alt="gitea 3 tier and all in one comparison" style="margin-bottom:0em"/></p>
+						<ul style="font-size: 0.75em;">
+							<li class="fragment fade-in"><span class="fragment highlight-blue">All-in-one</span>: <span class="fragment highlight-purple">quicker</span> setup, <span class="fragment highlight-green">easier</span> rollback, perfect <span class="fragment highlight-purple">increment</span><span class="fragment fade-in"> and could migrate to three-tier later</span></li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Three-Tier</span>: <span class="fragment highlight-yellow">Great</span> for systems level <span class="fragment highlight-orange">practice</span></li>
+						</ul>
+						<p class="fragment fade-in" style="font-size:0.65em"><em>(It all comes back to requirements and goals)</em></p>
+					</section>
+				</section>
+
+				<section>
+					<section style="padding-bottom:10em">
+						<h3>Recap &amp; Closing</h3>
+						<p>
+							<span class="fragment fade-in"><span class="fragment highlight-blue">Optimize Time</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Design Smart</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Evaluate Goals</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Automate Early</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Stay Independent</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Be Flexible</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Document Everything</span></span><span class="fragment fade-in">, <span class="fragment highlight-blue">Take Notes</span></span>
+						</p>
+					</section>
+					<section style="padding-bottom:10em">
+						<h3>Recap &amp; Closing</h3>
+						<ul style="list-style-type: none; font-size:0.80em">
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Slides (Reveal.js)</span>
+								<ul style="list-style-type: none;"><li class="fragment fade-in">https://github.com/tyraziel/home-labbing-on-a-time-budget/</li></ul>
+							</li>
+							<li>&nbsp;</li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">Home Lab Management</span>
+								<ul style="list-style-type: none;"><li class="fragment fade-in">https://github.com/tyraziel/home-lab-management/</li></ul>
+							</li>
+							<li>&nbsp;</li>
+							<li class="fragment fade-in"><span class="fragment highlight-blue">THOUGHTS.md</span>
+								<ul style="list-style-type: none;"><li class="fragment fade-in">https://tyraziel.substack.com/</li></ul>
+							</li>
+						</ul>
+					</section>
+					<section style="padding-bottom:4.5em"><h3>THANK YOU</h3></section>
+					<section style="padding-bottom:4.5em"><h3>Q&amp;A</h3></section>
+				</section>
+			</div>
+
+			<footer class="reveal-footer">
+				<div style="float:left;padding:0.1em 0.25em 0.1em 0.25em; border:0px solid red;margin:0em">
+					<img src="./img/tyraziel-avatar.png" style="max-width: 90px; border:0px solid red; margin:0.0em" />
+				</div>
+				<div style="float:left;clear:both;padding:0.1em 0.25em 0.1em 0.25em; border:0px solid red;margin:0em">
+					<img src="./img/vibe-coder-transparent.png" style="max-width: 75px; border:0px solid red; margin:0.0em" />
+				</div>
+				<div style="margin-top:.25em">
+					Andrew Potozniak 
+				</div>
+				<div class="reveal-footer-title">
+					tyraziel - 1.z3r0
+				</div>
+				<div class="reveal-footer-binary" style="margin-top:1.95em">
+					01010000 01101111 01110100 01101111 01111010 01101110 01101001 01100001 01101011
+				</div>
+				<div class="reveal-footer-email">andrew.potozniak@gmail.com</div>
+			</footer>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
