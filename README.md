@@ -22,3 +22,7 @@ Whether you're an IT professional, a student, or a hobbyist, this session will p
 ### Tyraziel's Home Lab Management GitHub
 
 [Home Lab Management](https://github.com/tyraziel/home-lab-management)
+
+## Live Slides
+
+[Home Labbing on a Time Budget - Live Slides](https://tyraziel.github.io/home-labbing-on-a-time-budget/)
